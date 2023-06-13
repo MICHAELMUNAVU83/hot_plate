@@ -29,6 +29,19 @@
     <%= select(f, :status, ["active", "inactive"], prompt: "Select Status") %>
     <%= error_tag(f, :status) %>
 
+
+ <%= label(f, :restaurant_id) %>
+        <%= select(
+          f,
+          :restaurant_id,
+          @restaurants,
+          prompt: "Select a Restaurant"
+
+        ) %>
+
+          <%= error_tag(f, :restaurant_id) %>
+
+
     <%= label(f, :food_image) %>
     <%= live_file_input(@uploads.food_image) %>
 

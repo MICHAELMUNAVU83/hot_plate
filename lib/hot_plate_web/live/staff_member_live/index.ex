@@ -4,11 +4,21 @@ defmodule HotPlateWeb.StaffMemberLive.Index do
   alias HotPlate.StaffMembers
   alias HotPlate.StaffMembers.StaffMember
   alias HotPlate.Companies
+  alias HotPlate.Restaurants
 
   @impl true
   def mount(_params, session, socket) do
     company = Companies.get_company_by_session_token(session["company_token"])
-    {:ok, socket |> assign(:company, company) |> assign(:staff_members, list_staff_members())}
+
+    {:ok,
+     socket
+     |> assign(:company, company)
+     |> assign(:staff_members, list_staff_members())
+     |> assign(
+       :restaurants,
+       Restaurants.list_restaurants()
+       |> Enum.map(fn restaurant -> {restaurant.name, restaurant.id} end)
+     )}
   end
 
   @impl true

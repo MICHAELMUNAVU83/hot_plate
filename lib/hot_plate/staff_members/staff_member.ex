@@ -9,6 +9,7 @@ defmodule HotPlate.StaffMembers.StaffMember do
     field(:profile_picture, :string)
     field(:status, :string)
     belongs_to(:company, HotPlate.Companies.Company)
+    belongs_to(:restaurant, HotPlate.Restaurants.Restaurant)
 
     timestamps()
   end

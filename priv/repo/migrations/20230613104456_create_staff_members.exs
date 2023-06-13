@@ -9,6 +9,7 @@ defmodule HotPlate.Repo.Migrations.CreateStaffMembers do
       add(:contact, :string)
       add(:status, :string)
       add(:company_id, references(:companies, on_delete: :nothing))
+      add(:restaurant_id, references(:restaurants, on_delete: :nothing))
 
       timestamps()
     end

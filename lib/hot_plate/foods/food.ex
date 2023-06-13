@@ -18,7 +18,25 @@ defmodule HotPlate.Foods.Food do
   @doc false
   def changeset(food, attrs) do
     food
-    |> cast(attrs, [:name, :price, :ready_time, :pax, :status, :image, :company_id])
-    |> validate_required([:name, :price, :ready_time, :pax, :status, :image, :company_id])
+    |> cast(attrs, [
+      :name,
+      :price,
+      :ready_time,
+      :pax,
+      :status,
+      :image,
+      :company_id,
+      :restaurant_id
+    ])
+    |> validate_required([
+      :name,
+      :price,
+      :ready_time,
+      :pax,
+      :status,
+      :image,
+      :company_id,
+      :restaurant_id
+    ])
   end
 end

@@ -42,5 +42,6 @@
 
 <span>
   <%= live_patch("Edit", to: Routes.food_show_path(@socket, :edit, @food), class: "button") %>
-</span> |
+</span>
+|
 <span><%= live_redirect("Back", to: Routes.food_index_path(@socket, :index)) %></span>
