@@ -1,11 +1,20 @@
 <div class="landing-page-bg h-[100vh] bg-cover bg-[30%] bg-no-repeat w-[100%] flex justify-center items-center">
   <div class="w-[50%] mx-auto h-[50%] p-8 bg-black/80 ">
-    <div class="w-[100%] h-[100%] border-2 border-[#F36363] flex justify-center items-center">
-     <img
-    src={Routes.static_path(@conn, "/images/logo.png")}
-    alt="doctor"
-    class="w-[180px]  m-4 object-cover"
-  />
+    <div class="w-[100%] h-[100%] border-2 border-[#F36363] flex flex-col text-white justify-center items-center">
+      <img
+        src={Routes.static_path(@conn, "/images/logo.png")}
+        alt="doctor"
+        class="w-[180px]  m-4 object-cover"
+      />
+
+      <p>
+        Manage orders from your customers
+      </p>
+
+      <%= link("Get Started",
+        to: Routes.dashboard_index_path(@conn, :index),
+        class: "bg-[#F36363] text-white p-2 rounded-md m-2"
+      ) %>
     </div>
   </div>
 </div>
