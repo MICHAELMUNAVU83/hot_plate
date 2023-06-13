@@ -7,30 +7,40 @@
     id="restaurant-form"
     phx-target={@myself}
     phx-change="validate"
-    phx-submit="save">
-  
-    <%= label f, :name %>
-    <%= text_input f, :name %>
-    <%= error_tag f, :name %>
-  
-    <%= label f, :description %>
-    <%= text_input f, :description %>
-    <%= error_tag f, :description %>
-  
-    <%= label f, :location %>
-    <%= text_input f, :location %>
-    <%= error_tag f, :location %>
-  
-    <%= label f, :longitude %>
-    <%= number_input f, :longitude %>
-    <%= error_tag f, :longitude %>
-  
-    <%= label f, :latitude %>
-    <%= number_input f, :latitude %>
-    <%= error_tag f, :latitude %>
-  
+    phx-submit="save"
+  >
+    <%= label(f, :name) %>
+    <%= text_input(f, :name) %>
+    <%= error_tag(f, :name) %>
+
+    <%= label(f, :description) %>
+    <%= text_input(f, :description) %>
+    <%= error_tag(f, :description) %>
+
+    <%= label(f, :location) %>
+    <%= text_input(f, :location) %>
+    <%= error_tag(f, :location) %>
+
+    <%= label(f, :longitude) %>
+    <%= number_input(f, :longitude) %>
+    <%= error_tag(f, :longitude) %>
+
+    <%= label(f, :latitude) %>
+    <%= number_input(f, :latitude) %>
+    <%= error_tag(f, :latitude) %>
+
+    <%= label(f, :image) %>
+    <%= live_file_input(@uploads.restaurant_logo) %>
+
+    <%= for entry <- @uploads.restaurant_logo do %>
+      <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
+      <button phx-click="cancel-upload" phx-value-ref={entry.ref}>
+        Cancel
+      </button>
+    <% end %>
+
     <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+      <%= submit("Save", phx_disable_with: "Saving...") %>
     </div>
   </.form>
 </div>

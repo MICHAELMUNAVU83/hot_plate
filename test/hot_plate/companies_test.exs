@@ -31,7 +31,10 @@ defmodule HotPlate.CompaniesTest do
       %{id: id} = company = company_fixture()
 
       assert %Company{id: ^id} =
-               Companies.get_company_by_email_and_password(company.email, valid_company_password())
+               Companies.get_company_by_email_and_password(
+                 company.email,
+                 valid_company_password()
+               )
     end
   end
 
@@ -59,7 +62,8 @@ defmodule HotPlate.CompaniesTest do
     end
 
     test "validates email and password when given" do
-      {:error, changeset} = Companies.register_company(%{email: "not valid", password: "not valid"})
+      {:error, changeset} =
+        Companies.register_company(%{email: "not valid", password: "not valid"})
 
       assert %{
                email: ["must have the @ sign and no spaces"],
@@ -168,7 +172,10 @@ defmodule HotPlate.CompaniesTest do
 
     test "applies the email without persisting it", %{company: company} do
       email = unique_company_email()
-      {:ok, company} = Companies.apply_company_email(company, valid_company_password(), %{email: email})
+
+      {:ok, company} =
+        Companies.apply_company_email(company, valid_company_password(), %{email: email})
+
       assert company.email == email
       assert Companies.get_company!(company.id).email != email
     end
@@ -200,7 +207,11 @@ defmodule HotPlate.CompaniesTest do
 
       token =
         extract_company_token(fn url ->
-          Companies.deliver_update_email_instructions(%{company | email: email}, company.email, url)
+          Companies.deliver_update_email_instructions(
+            %{company | email: email},
+            company.email,
+            url
+          )
         end)
 
       %{company: company, token: token, email: email}
@@ -223,7 +234,9 @@ defmodule HotPlate.CompaniesTest do
     end
 
     test "does not update email if company email changed", %{company: company, token: token} do
-      assert Companies.update_company_email(%{company | email: "current@example.com"}, token) == :error
+      assert Companies.update_company_email(%{company | email: "current@example.com"}, token) ==
+               :error
+
       assert Repo.get!(Company, company.id).email == company.email
       assert Repo.get_by(CompanyToken, company_id: company.id)
     end
@@ -283,7 +296,9 @@ defmodule HotPlate.CompaniesTest do
 
     test "validates current password", %{company: company} do
       {:error, changeset} =
-        Companies.update_company_password(company, "invalid", %{password: valid_company_password()})
+        Companies.update_company_password(company, "invalid", %{
+          password: valid_company_password()
+        })
 
       assert %{current_password: ["is not valid"]} = errors_on(changeset)
     end
@@ -488,7 +503,9 @@ defmodule HotPlate.CompaniesTest do
     end
 
     test "updates the password", %{company: company} do
-      {:ok, updated_company} = Companies.reset_company_password(company, %{password: "new valid password"})
+      {:ok, updated_company} =
+        Companies.reset_company_password(company, %{password: "new valid password"})
+
       assert is_nil(updated_company.password)
       assert Companies.get_company_by_email_and_password(company.email, "new valid password")
     end

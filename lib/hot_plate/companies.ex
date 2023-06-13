@@ -168,10 +168,15 @@ defmodule HotPlate.Companies do
   """
   def deliver_update_email_instructions(%Company{} = company, current_email, update_email_url_fun)
       when is_function(update_email_url_fun, 1) do
-    {encoded_token, company_token} = CompanyToken.build_email_token(company, "change:#{current_email}")
+    {encoded_token, company_token} =
+      CompanyToken.build_email_token(company, "change:#{current_email}")
 
     Repo.insert!(company_token)
-    CompanyNotifier.deliver_update_email_instructions(company, update_email_url_fun.(encoded_token))
+
+    CompanyNotifier.deliver_update_email_instructions(
+      company,
+      update_email_url_fun.(encoded_token)
+    )
   end
 
   @doc """
@@ -263,7 +268,11 @@ defmodule HotPlate.Companies do
     else
       {encoded_token, company_token} = CompanyToken.build_email_token(company, "confirm")
       Repo.insert!(company_token)
-      CompanyNotifier.deliver_confirmation_instructions(company, confirmation_url_fun.(encoded_token))
+
+      CompanyNotifier.deliver_confirmation_instructions(
+        company,
+        confirmation_url_fun.(encoded_token)
+      )
     end
   end
 
@@ -286,7 +295,10 @@ defmodule HotPlate.Companies do
   defp confirm_company_multi(company) do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:company, Company.confirm_changeset(company))
-    |> Ecto.Multi.delete_all(:tokens, CompanyToken.company_and_contexts_query(company, ["confirm"]))
+    |> Ecto.Multi.delete_all(
+      :tokens,
+      CompanyToken.company_and_contexts_query(company, ["confirm"])
+    )
   end
 
   ## Reset password
@@ -304,7 +316,11 @@ defmodule HotPlate.Companies do
       when is_function(reset_password_url_fun, 1) do
     {encoded_token, company_token} = CompanyToken.build_email_token(company, "reset_password")
     Repo.insert!(company_token)
-    CompanyNotifier.deliver_reset_password_instructions(company, reset_password_url_fun.(encoded_token))
+
+    CompanyNotifier.deliver_reset_password_instructions(
+      company,
+      reset_password_url_fun.(encoded_token)
+    )
   end
 
   @doc """

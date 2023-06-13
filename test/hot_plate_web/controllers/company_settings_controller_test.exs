@@ -95,13 +95,22 @@ defmodule HotPlateWeb.CompanySettingsControllerTest do
 
       token =
         extract_company_token(fn url ->
-          Companies.deliver_update_email_instructions(%{company | email: email}, company.email, url)
+          Companies.deliver_update_email_instructions(
+            %{company | email: email},
+            company.email,
+            url
+          )
         end)
 
       %{token: token, email: email}
     end
 
-    test "updates the company email once", %{conn: conn, company: company, token: token, email: email} do
+    test "updates the company email once", %{
+      conn: conn,
+      company: company,
+      token: token,
+      email: email
+    } do
       conn = get(conn, Routes.company_settings_path(conn, :confirm_email, token))
       assert redirected_to(conn) == Routes.company_settings_path(conn, :edit)
       assert get_flash(conn, :info) =~ "Email changed successfully"

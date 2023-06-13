@@ -4,8 +4,20 @@ defmodule HotPlateWeb.RestaurantLiveTest do
   import Phoenix.LiveViewTest
   import HotPlate.RestaurantsFixtures
 
-  @create_attrs %{description: "some description", latitude: 42, location: "some location", longitude: 42, name: "some name"}
-  @update_attrs %{description: "some updated description", latitude: 43, location: "some updated location", longitude: 43, name: "some updated name"}
+  @create_attrs %{
+    description: "some description",
+    latitude: 42,
+    location: "some location",
+    longitude: 42,
+    name: "some name"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    latitude: 43,
+    location: "some updated location",
+    longitude: 43,
+    name: "some updated name"
+  }
   @invalid_attrs %{description: nil, latitude: nil, location: nil, longitude: nil, name: nil}
 
   defp create_restaurant(_) do

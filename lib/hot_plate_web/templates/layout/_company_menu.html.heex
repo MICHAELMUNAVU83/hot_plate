@@ -1,10 +1,12 @@
 <ul>
-<%= if @current_company do %>
-  <li><%= @current_company.email %></li>
-  <li><%= link "Settings", to: Routes.company_settings_path(@conn, :edit) %></li>
-  <li><%= link "Log out", to: Routes.company_session_path(@conn, :delete), method: :delete %></li>
-<% else %>
-  <li><%= link "Register", to: Routes.company_registration_path(@conn, :new) %></li>
-  <li><%= link "Log in", to: Routes.company_session_path(@conn, :new) %></li>
-<% end %>
+  <%= if @current_company do %>
+    <li><%= @current_company.email %></li>
+    <li><%= link("Settings", to: Routes.company_settings_path(@conn, :edit)) %></li>
+    <li>
+      <%= link("Log out", to: Routes.company_session_path(@conn, :delete), method: :delete) %>
+    </li>
+  <% else %>
+    <li><%= link("Register", to: Routes.company_registration_path(@conn, :new)) %></li>
+    <li><%= link("Log in", to: Routes.company_session_path(@conn, :new)) %></li>
+  <% end %>
 </ul>

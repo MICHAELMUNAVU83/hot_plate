@@ -8,6 +8,7 @@ defmodule HotPlate.Repo.Migrations.CreateRestaurants do
       add :location, :string
       add :longitude, :integer
       add :latitude, :integer
+      add :logo, :string
 
       timestamps()
     end

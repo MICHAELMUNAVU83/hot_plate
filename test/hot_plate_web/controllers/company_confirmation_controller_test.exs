@@ -30,7 +30,10 @@ defmodule HotPlateWeb.CompanyConfirmationControllerTest do
       assert Repo.get_by!(Companies.CompanyToken, company_id: company.id).context == "confirm"
     end
 
-    test "does not send confirmation token if Company is confirmed", %{conn: conn, company: company} do
+    test "does not send confirmation token if Company is confirmed", %{
+      conn: conn,
+      company: company
+    } do
       Repo.update!(Companies.Company.confirm_changeset(company))
 
       conn =

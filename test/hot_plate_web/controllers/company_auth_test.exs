@@ -20,7 +20,10 @@ defmodule HotPlateWeb.CompanyAuthTest do
     test "stores the company token in the session", %{conn: conn, company: company} do
       conn = CompanyAuth.log_in_company(conn, company)
       assert token = get_session(conn, :company_token)
-      assert get_session(conn, :live_socket_id) == "companies_sessions:#{Base.url_encode64(token)}"
+
+      assert get_session(conn, :live_socket_id) ==
+               "companies_sessions:#{Base.url_encode64(token)}"
+
       assert redirected_to(conn) == "/"
       assert Companies.get_company_by_session_token(token)
     end
@@ -31,12 +34,16 @@ defmodule HotPlateWeb.CompanyAuthTest do
     end
 
     test "redirects to the configured path", %{conn: conn, company: company} do
-      conn = conn |> put_session(:company_return_to, "/hello") |> CompanyAuth.log_in_company(company)
+      conn =
+        conn |> put_session(:company_return_to, "/hello") |> CompanyAuth.log_in_company(company)
+
       assert redirected_to(conn) == "/hello"
     end
 
     test "writes a cookie if remember_me is configured", %{conn: conn, company: company} do
-      conn = conn |> fetch_cookies() |> CompanyAuth.log_in_company(company, %{"remember_me" => "true"})
+      conn =
+        conn |> fetch_cookies() |> CompanyAuth.log_in_company(company, %{"remember_me" => "true"})
+
       assert get_session(conn, :company_token) == conn.cookies[@remember_me_cookie]
 
       assert %{value: signed_token, max_age: max_age} = conn.resp_cookies[@remember_me_cookie]
@@ -85,7 +92,12 @@ defmodule HotPlateWeb.CompanyAuthTest do
   describe "fetch_current_company/2" do
     test "authenticates company from session", %{conn: conn, company: company} do
       company_token = Companies.generate_company_session_token(company)
-      conn = conn |> put_session(:company_token, company_token) |> CompanyAuth.fetch_current_company([])
+
+      conn =
+        conn
+        |> put_session(:company_token, company_token)
+        |> CompanyAuth.fetch_current_company([])
+
       assert conn.assigns.current_company.id == company.id
     end
 
@@ -115,7 +127,11 @@ defmodule HotPlateWeb.CompanyAuthTest do
 
   describe "redirect_if_company_is_authenticated/2" do
     test "redirects if company is authenticated", %{conn: conn, company: company} do
-      conn = conn |> assign(:current_company, company) |> CompanyAuth.redirect_if_company_is_authenticated([])
+      conn =
+        conn
+        |> assign(:current_company, company)
+        |> CompanyAuth.redirect_if_company_is_authenticated([])
+
       assert conn.halted
       assert redirected_to(conn) == "/"
     end
@@ -162,7 +178,9 @@ defmodule HotPlateWeb.CompanyAuthTest do
     end
 
     test "does not redirect if company is authenticated", %{conn: conn, company: company} do
-      conn = conn |> assign(:current_company, company) |> CompanyAuth.require_authenticated_company([])
+      conn =
+        conn |> assign(:current_company, company) |> CompanyAuth.require_authenticated_company([])
+
       refute conn.halted
       refute conn.status
     end

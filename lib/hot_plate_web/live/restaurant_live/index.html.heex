@@ -16,18 +16,26 @@
 <table>
   <thead>
     <tr>
+      <th>Images</th>
       <th>Name</th>
       <th>Description</th>
       <th>Location</th>
       <th>Longitude</th>
       <th>Latitude</th>
 
-      <th></th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody id="restaurants">
     <%= for restaurant <- @restaurants do %>
       <tr id={"restaurant-#{restaurant.id}"}>
+        <td>
+          <img
+            src={restaurant.logo}
+            alt="art image"
+            style="width: 100px; height: 100px; object-fit: cover;"
+          />
+        </td>
         <td><%= restaurant.name %></td>
         <td><%= restaurant.description %></td>
         <td><%= restaurant.location %></td>
@@ -35,13 +43,24 @@
         <td><%= restaurant.latitude %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.restaurant_show_path(@socket, :show, restaurant) %></span>
-          <span><%= live_patch "Edit", to: Routes.restaurant_index_path(@socket, :edit, restaurant) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: restaurant.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show", to: Routes.restaurant_show_path(@socket, :show, restaurant)) %>
+          </span>
+          <span>
+            <%= live_patch("Edit", to: Routes.restaurant_index_path(@socket, :edit, restaurant)) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: restaurant.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Restaurant", to: Routes.restaurant_index_path(@socket, :new) %></span>
+<span><%= live_patch("New Restaurant", to: Routes.restaurant_index_path(@socket, :new)) %></span>

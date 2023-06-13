@@ -2,11 +2,12 @@
 
 <.form let={_f} for={:company} action={Routes.company_confirmation_path(@conn, :update, @token)}>
   <div>
-    <%= submit "Confirm my account" %>
+    <%= submit("Confirm my account") %>
   </div>
 </.form>
 
 <p>
-  <%= link "Register", to: Routes.company_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.company_session_path(@conn, :new) %>
+  <%= link("Register", to: Routes.company_registration_path(@conn, :new)) %> | <%= link("Log in",
+    to: Routes.company_session_path(@conn, :new)
+  ) %>
 </p>

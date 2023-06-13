@@ -13,7 +13,11 @@ defmodule HotPlateWeb.CompanyRegistrationControllerTest do
     end
 
     test "redirects if already logged in", %{conn: conn} do
-      conn = conn |> log_in_company(company_fixture()) |> get(Routes.company_registration_path(conn, :new))
+      conn =
+        conn
+        |> log_in_company(company_fixture())
+        |> get(Routes.company_registration_path(conn, :new))
+
       assert redirected_to(conn) == "/"
     end
   end

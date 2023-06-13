@@ -21,7 +21,13 @@ defmodule HotPlate.RestaurantsTest do
     end
 
     test "create_restaurant/1 with valid data creates a restaurant" do
-      valid_attrs = %{description: "some description", latitude: 42, location: "some location", longitude: 42, name: "some name"}
+      valid_attrs = %{
+        description: "some description",
+        latitude: 42,
+        location: "some location",
+        longitude: 42,
+        name: "some name"
+      }
 
       assert {:ok, %Restaurant{} = restaurant} = Restaurants.create_restaurant(valid_attrs)
       assert restaurant.description == "some description"
@@ -37,9 +43,18 @@ defmodule HotPlate.RestaurantsTest do
 
     test "update_restaurant/2 with valid data updates the restaurant" do
       restaurant = restaurant_fixture()
-      update_attrs = %{description: "some updated description", latitude: 43, location: "some updated location", longitude: 43, name: "some updated name"}
 
-      assert {:ok, %Restaurant{} = restaurant} = Restaurants.update_restaurant(restaurant, update_attrs)
+      update_attrs = %{
+        description: "some updated description",
+        latitude: 43,
+        location: "some updated location",
+        longitude: 43,
+        name: "some updated name"
+      }
+
+      assert {:ok, %Restaurant{} = restaurant} =
+               Restaurants.update_restaurant(restaurant, update_attrs)
+
       assert restaurant.description == "some updated description"
       assert restaurant.latitude == 43
       assert restaurant.location == "some updated location"
@@ -49,7 +64,10 @@ defmodule HotPlate.RestaurantsTest do
 
     test "update_restaurant/2 with invalid data returns error changeset" do
       restaurant = restaurant_fixture()
-      assert {:error, %Ecto.Changeset{}} = Restaurants.update_restaurant(restaurant, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Restaurants.update_restaurant(restaurant, @invalid_attrs)
+
       assert restaurant == Restaurants.get_restaurant!(restaurant.id)
     end
 

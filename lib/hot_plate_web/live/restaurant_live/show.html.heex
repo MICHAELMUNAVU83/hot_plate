@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @restaurant.name %>
@@ -39,8 +38,12 @@
     <strong>Latitude:</strong>
     <%= @restaurant.latitude %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.restaurant_show_path(@socket, :edit, @restaurant), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.restaurant_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit",
+    to: Routes.restaurant_show_path(@socket, :edit, @restaurant),
+    class: "button"
+  ) %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.restaurant_index_path(@socket, :index)) %></span>
