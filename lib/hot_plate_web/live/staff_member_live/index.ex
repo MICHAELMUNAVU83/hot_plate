@@ -3,10 +3,12 @@ defmodule HotPlateWeb.StaffMemberLive.Index do
 
   alias HotPlate.StaffMembers
   alias HotPlate.StaffMembers.StaffMember
+  alias HotPlate.Companies
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :staff_members, list_staff_members())}
+  def mount(_params, session, socket) do
+    company = Companies.get_company_by_session_token(session["company_token"])
+    {:ok, socket |> assign(:company, company) |> assign(:staff_members, list_staff_members())}
   end
 
   @impl true

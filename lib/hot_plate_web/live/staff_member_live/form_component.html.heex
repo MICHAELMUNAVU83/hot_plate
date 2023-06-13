@@ -7,26 +7,42 @@
     id="staff_member-form"
     phx-target={@myself}
     phx-change="validate"
-    phx-submit="save">
-  
-    <%= label f, :first_name %>
-    <%= text_input f, :first_name %>
-    <%= error_tag f, :first_name %>
-  
-    <%= label f, :last_name %>
-    <%= text_input f, :last_name %>
-    <%= error_tag f, :last_name %>
-  
-    <%= label f, :profile_picture %>
-    <%= text_input f, :profile_picture %>
-    <%= error_tag f, :profile_picture %>
-  
-    <%= label f, :contact %>
-    <%= text_input f, :contact %>
-    <%= error_tag f, :contact %>
-  
+    phx-submit="save"
+  >
+    <%= label(f, :first_name) %>
+    <%= text_input(f, :first_name) %>
+    <%= error_tag(f, :first_name) %>
+
+    <%= label(f, :last_name) %>
+    <%= text_input(f, :last_name) %>
+    <%= error_tag(f, :last_name) %>
+
+    <%= label(f, :contact) %>
+    <%= text_input(f, :contact) %>
+    <%= error_tag(f, :contact) %>
+
+
+    <%= label(f, :status) %>
+    <%= select(f, :status, ["active", "inactive"], prompt: "Select Status") %>
+    <%= error_tag(f, :status) %>
+
+    <%= label(f, :staff_photo) %>
+    <%= live_file_input(@uploads.staff_photo) %>
+
+    <%= for entry <- @uploads.staff_photo.entries do %>
+      <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
+      <button
+        type="button"
+        phx-click="cancel-upload"
+        phx-value-ref={entry.ref}
+        phx-target={@myself}
+      >
+        Cancel
+      </button>
+    <% end %>
+
     <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+      <%= submit("Save", phx_disable_with: "Saving...") %>
     </div>
   </.form>
 </div>

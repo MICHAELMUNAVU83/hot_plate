@@ -4,8 +4,18 @@ defmodule HotPlateWeb.StaffMemberLiveTest do
   import Phoenix.LiveViewTest
   import HotPlate.StaffMembersFixtures
 
-  @create_attrs %{contact: "some contact", first_name: "some first_name", last_name: "some last_name", profile_picture: "some profile_picture"}
-  @update_attrs %{contact: "some updated contact", first_name: "some updated first_name", last_name: "some updated last_name", profile_picture: "some updated profile_picture"}
+  @create_attrs %{
+    contact: "some contact",
+    first_name: "some first_name",
+    last_name: "some last_name",
+    profile_picture: "some profile_picture"
+  }
+  @update_attrs %{
+    contact: "some updated contact",
+    first_name: "some updated first_name",
+    last_name: "some updated last_name",
+    profile_picture: "some updated profile_picture"
+  }
   @invalid_attrs %{contact: nil, first_name: nil, last_name: nil, profile_picture: nil}
 
   defp create_staff_member(_) do
@@ -70,7 +80,10 @@ defmodule HotPlateWeb.StaffMemberLiveTest do
     test "deletes staff_member in listing", %{conn: conn, staff_member: staff_member} do
       {:ok, index_live, _html} = live(conn, Routes.staff_member_index_path(conn, :index))
 
-      assert index_live |> element("#staff_member-#{staff_member.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#staff_member-#{staff_member.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#staff_member-#{staff_member.id}")
     end
   end
@@ -79,14 +92,16 @@ defmodule HotPlateWeb.StaffMemberLiveTest do
     setup [:create_staff_member]
 
     test "displays staff_member", %{conn: conn, staff_member: staff_member} do
-      {:ok, _show_live, html} = live(conn, Routes.staff_member_show_path(conn, :show, staff_member))
+      {:ok, _show_live, html} =
+        live(conn, Routes.staff_member_show_path(conn, :show, staff_member))
 
       assert html =~ "Show Staff member"
       assert html =~ staff_member.contact
     end
 
     test "updates staff_member within modal", %{conn: conn, staff_member: staff_member} do
-      {:ok, show_live, _html} = live(conn, Routes.staff_member_show_path(conn, :show, staff_member))
+      {:ok, show_live, _html} =
+        live(conn, Routes.staff_member_show_path(conn, :show, staff_member))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Staff member"

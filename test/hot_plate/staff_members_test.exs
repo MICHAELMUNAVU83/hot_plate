@@ -21,7 +21,12 @@ defmodule HotPlate.StaffMembersTest do
     end
 
     test "create_staff_member/1 with valid data creates a staff_member" do
-      valid_attrs = %{contact: "some contact", first_name: "some first_name", last_name: "some last_name", profile_picture: "some profile_picture"}
+      valid_attrs = %{
+        contact: "some contact",
+        first_name: "some first_name",
+        last_name: "some last_name",
+        profile_picture: "some profile_picture"
+      }
 
       assert {:ok, %StaffMember{} = staff_member} = StaffMembers.create_staff_member(valid_attrs)
       assert staff_member.contact == "some contact"
@@ -36,9 +41,17 @@ defmodule HotPlate.StaffMembersTest do
 
     test "update_staff_member/2 with valid data updates the staff_member" do
       staff_member = staff_member_fixture()
-      update_attrs = %{contact: "some updated contact", first_name: "some updated first_name", last_name: "some updated last_name", profile_picture: "some updated profile_picture"}
 
-      assert {:ok, %StaffMember{} = staff_member} = StaffMembers.update_staff_member(staff_member, update_attrs)
+      update_attrs = %{
+        contact: "some updated contact",
+        first_name: "some updated first_name",
+        last_name: "some updated last_name",
+        profile_picture: "some updated profile_picture"
+      }
+
+      assert {:ok, %StaffMember{} = staff_member} =
+               StaffMembers.update_staff_member(staff_member, update_attrs)
+
       assert staff_member.contact == "some updated contact"
       assert staff_member.first_name == "some updated first_name"
       assert staff_member.last_name == "some updated last_name"
@@ -47,7 +60,10 @@ defmodule HotPlate.StaffMembersTest do
 
     test "update_staff_member/2 with invalid data returns error changeset" do
       staff_member = staff_member_fixture()
-      assert {:error, %Ecto.Changeset{}} = StaffMembers.update_staff_member(staff_member, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               StaffMembers.update_staff_member(staff_member, @invalid_attrs)
+
       assert staff_member == StaffMembers.get_staff_member!(staff_member.id)
     end
 
