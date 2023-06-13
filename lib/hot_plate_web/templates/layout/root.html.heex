@@ -16,12 +16,6 @@
     </script>
   </head>
   <body>
-    <%= render("_company_menu.html", assigns) %>
-    <%= link("Dashboard", to: Routes.dashboard_index_path(@conn, :index), class: "btn btn-primary") %>
-
-    <%= if @current_company do %>
-      sidebashboard
-    <% end %>
     <header></header>
     <%= @inner_content %>
   </body>

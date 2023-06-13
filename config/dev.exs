@@ -26,7 +26,8 @@ config :hot_plate, HotPlateWeb.Endpoint,
   secret_key_base: "T8bzPf+HSLG3hEi2NSvUXvxStFkV99LuQJk9EL0BaXY1t/xKNm0nmaYx7DMSriJb",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
