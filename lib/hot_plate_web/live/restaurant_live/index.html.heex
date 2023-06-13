@@ -8,6 +8,7 @@
       title={@page_title}
       action={@live_action}
       restaurant={@restaurant}
+      company={@company}
       return_to={Routes.restaurant_index_path(@socket, :index)}
     />
   </.modal>
@@ -19,7 +20,9 @@
       <th>Images</th>
       <th>Name</th>
       <th>Description</th>
+      <th>Status </th>
       <th>Location</th>
+
       <th>Longitude</th>
       <th>Latitude</th>
 
@@ -38,6 +41,7 @@
         </td>
         <td><%= restaurant.name %></td>
         <td><%= restaurant.description %></td>
+          <td><%= restaurant.status %></td>
         <td><%= restaurant.location %></td>
         <td><%= restaurant.longitude %></td>
         <td><%= restaurant.latitude %></td>

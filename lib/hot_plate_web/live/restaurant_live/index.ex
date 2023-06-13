@@ -3,10 +3,13 @@ defmodule HotPlateWeb.RestaurantLive.Index do
 
   alias HotPlate.Restaurants
   alias HotPlate.Restaurants.Restaurant
+  alias HotPlate.Companies
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :restaurants, list_restaurants())}
+  def mount(_params, session, socket) do
+    company = Companies.get_company_by_session_token(session["company_token"])
+
+    {:ok, socket |> assign(:company, company) |> assign(:restaurants, list_restaurants())}
   end
 
   @impl true

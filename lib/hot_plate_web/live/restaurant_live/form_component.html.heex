@@ -29,15 +29,32 @@
     <%= number_input(f, :latitude) %>
     <%= error_tag(f, :latitude) %>
 
-    <%= label(f, :image) %>
+     <%= label(f, :status) %>
+    <%= select(f, :status, ["open" , "closed"] , [prompt: "Select Status"]) %>
+    <%= error_tag(f, :status) %>
+
+    <%= label(f, :restaurant_logo) %>
     <%= live_file_input(@uploads.restaurant_logo) %>
 
-    <%= for entry <- @uploads.restaurant_logo do %>
-      <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
-      <button phx-click="cancel-upload" phx-value-ref={entry.ref}>
-        Cancel
-      </button>
-    <% end %>
+
+      <%= for entry <- @uploads.restaurant_logo.entries do %>
+          <%= live_img_preview(entry , style: "max-width: 200px; max-height: 200px;") %>
+          <button
+           type="button"
+            phx-click="cancel-upload"
+            phx-value-ref={entry.ref}
+            phx-target={@myself}
+
+
+
+
+
+          >
+            Cancel
+          </button>
+        <% end %>
+
+
 
     <div>
       <%= submit("Save", phx_disable_with: "Saving...") %>

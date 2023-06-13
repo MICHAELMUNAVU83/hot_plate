@@ -27,8 +27,8 @@ defmodule HotPlateWeb.RestaurantLive.FormComponent do
 
   def handle_event("save", %{"restaurant" => restaurant_params}, socket) do
     uploaded_files =
-      consume_uploaded_entries(socket, :image, fn %{path: path}, _entry ->
-        dest = Path.join([:code.priv_dir(:art_store), "static", "uploads", Path.basename(path)])
+      consume_uploaded_entries(socket, :restaurant_logo, fn %{path: path}, _entry ->
+        dest = Path.join([:code.priv_dir(:hot_plate), "static", "uploads", Path.basename(path)])
 
         # The `static/uploads` directory must exist for `File.cp!/2`
         # and MyAppWeb.static_paths/0 should contain uploads to work,.
@@ -37,7 +37,11 @@ defmodule HotPlateWeb.RestaurantLive.FormComponent do
       end)
 
     {:noreply, update(socket, :uploaded_files, &(&1 ++ uploaded_files))}
-    new_restaurant_params = Map.put(restaurant_params, "logo", List.first(uploaded_files))
+
+    new_restaurant_params =
+      Map.put(restaurant_params, "logo", List.first(uploaded_files))
+      |> Map.put("company_id", socket.assigns.company.id)
+
     save_restaurant(socket, socket.assigns.action, new_restaurant_params)
   end
 
