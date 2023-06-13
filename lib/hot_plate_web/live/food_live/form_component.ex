@@ -25,8 +25,6 @@ defmodule HotPlateWeb.FoodLive.FormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
-
-
   def handle_event("save", %{"food" => food_params}, socket) do
     uploaded_files =
       consume_uploaded_entries(socket, :food_image, fn %{path: path}, _entry ->

@@ -7,31 +7,29 @@
     id="food-form"
     phx-target={@myself}
     phx-change="validate"
-    phx-submit="save">
+    phx-submit="save"
+  >
+    <%= label(f, :name) %>
+    <%= text_input(f, :name) %>
+    <%= error_tag(f, :name) %>
 
-    <%= label f, :name %>
-    <%= text_input f, :name %>
-    <%= error_tag f, :name %>
+    <%= label(f, :price) %>
+    <%= number_input(f, :price) %>
+    <%= error_tag(f, :price) %>
 
-    <%= label f, :price %>
-    <%= number_input f, :price %>
-    <%= error_tag f, :price %>
+    <%= label(f, :ready_time) %>
+    <%= text_input(f, :ready_time) %>
+    <%= error_tag(f, :ready_time) %>
 
-    <%= label f, :ready_time %>
-    <%= text_input f, :ready_time %>
-    <%= error_tag f, :ready_time %>
+    <%= label(f, :pax) %>
+    <%= number_input(f, :pax) %>
+    <%= error_tag(f, :pax) %>
 
-    <%= label f, :pax %>
-    <%= number_input f, :pax %>
-    <%= error_tag f, :pax %>
-
-      <%= label(f, :status) %>
+    <%= label(f, :status) %>
     <%= select(f, :status, ["active", "inactive"], prompt: "Select Status") %>
     <%= error_tag(f, :status) %>
 
-
-
-     <%= label(f, :food_image) %>
+    <%= label(f, :food_image) %>
     <%= live_file_input(@uploads.food_image) %>
 
     <%= for entry <- @uploads.food_image.entries do %>
@@ -47,7 +45,7 @@
     <% end %>
 
     <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+      <%= submit("Save", phx_disable_with: "Saving...") %>
     </div>
   </.form>
 </div>

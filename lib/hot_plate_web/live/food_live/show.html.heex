@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @food.name %>
@@ -39,8 +38,9 @@
     <strong>Status:</strong>
     <%= @food.status %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.food_show_path(@socket, :edit, @food), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.food_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.food_show_path(@socket, :edit, @food), class: "button") %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.food_index_path(@socket, :index)) %></span>

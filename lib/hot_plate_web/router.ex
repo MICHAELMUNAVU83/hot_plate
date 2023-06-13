@@ -39,7 +39,6 @@ defmodule HotPlateWeb.Router do
 
     live("/staff_members/:id", StaffMemberLive.Show, :show)
     live("/staff_members/:id/show/edit", StaffMemberLive.Show, :edit)
-    
 
     live "/foods", FoodLive.Index, :index
     live "/foods/new", FoodLive.Index, :new

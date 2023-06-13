@@ -21,7 +21,13 @@ defmodule HotPlate.FoodsTest do
     end
 
     test "create_food/1 with valid data creates a food" do
-      valid_attrs = %{name: "some name", pax: 42, price: 42, ready_time: "some ready_time", status: "some status"}
+      valid_attrs = %{
+        name: "some name",
+        pax: 42,
+        price: 42,
+        ready_time: "some ready_time",
+        status: "some status"
+      }
 
       assert {:ok, %Food{} = food} = Foods.create_food(valid_attrs)
       assert food.name == "some name"
@@ -37,7 +43,14 @@ defmodule HotPlate.FoodsTest do
 
     test "update_food/2 with valid data updates the food" do
       food = food_fixture()
-      update_attrs = %{name: "some updated name", pax: 43, price: 43, ready_time: "some updated ready_time", status: "some updated status"}
+
+      update_attrs = %{
+        name: "some updated name",
+        pax: 43,
+        price: 43,
+        ready_time: "some updated ready_time",
+        status: "some updated status"
+      }
 
       assert {:ok, %Food{} = food} = Foods.update_food(food, update_attrs)
       assert food.name == "some updated name"

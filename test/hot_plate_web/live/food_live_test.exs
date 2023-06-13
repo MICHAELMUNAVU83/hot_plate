@@ -4,8 +4,20 @@ defmodule HotPlateWeb.FoodLiveTest do
   import Phoenix.LiveViewTest
   import HotPlate.FoodsFixtures
 
-  @create_attrs %{name: "some name", pax: 42, price: 42, ready_time: "some ready_time", status: "some status"}
-  @update_attrs %{name: "some updated name", pax: 43, price: 43, ready_time: "some updated ready_time", status: "some updated status"}
+  @create_attrs %{
+    name: "some name",
+    pax: 42,
+    price: 42,
+    ready_time: "some ready_time",
+    status: "some status"
+  }
+  @update_attrs %{
+    name: "some updated name",
+    pax: 43,
+    price: 43,
+    ready_time: "some updated ready_time",
+    status: "some updated status"
+  }
   @invalid_attrs %{name: nil, pax: nil, price: nil, ready_time: nil, status: nil}
 
   defp create_food(_) do

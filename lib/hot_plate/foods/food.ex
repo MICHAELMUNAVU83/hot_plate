@@ -10,6 +10,7 @@ defmodule HotPlate.Foods.Food do
     field(:status, :string)
     field(:image, :string)
     belongs_to(:company, HotPlate.Companies.Company)
+    belongs_to(:restaurant, HotPlate.Restaurants.Restaurant)
 
     timestamps()
   end
