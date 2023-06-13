@@ -1,0 +1,41 @@
+<h1>Show Staff member</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.staff_member_show_path(@socket, :show, @staff_member)}>
+    <.live_component
+      module={HotPlateWeb.StaffMemberLive.FormComponent}
+      id={@staff_member.id}
+      title={@page_title}
+      action={@live_action}
+      staff_member={@staff_member}
+      return_to={Routes.staff_member_show_path(@socket, :show, @staff_member)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @staff_member.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @staff_member.last_name %>
+  </li>
+
+  <li>
+    <strong>Profile picture:</strong>
+    <%= @staff_member.profile_picture %>
+  </li>
+
+  <li>
+    <strong>Contact:</strong>
+    <%= @staff_member.contact %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.staff_member_show_path(@socket, :edit, @staff_member), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.staff_member_index_path(@socket, :index) %></span>

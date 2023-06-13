@@ -1,0 +1,45 @@
+<h1>Listing Staff members</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.staff_member_index_path(@socket, :index)}>
+    <.live_component
+      module={HotPlateWeb.StaffMemberLive.FormComponent}
+      id={@staff_member.id || :new}
+      title={@page_title}
+      action={@live_action}
+      staff_member={@staff_member}
+      return_to={Routes.staff_member_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Profile picture</th>
+      <th>Contact</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="staff_members">
+    <%= for staff_member <- @staff_members do %>
+      <tr id={"staff_member-#{staff_member.id}"}>
+        <td><%= staff_member.first_name %></td>
+        <td><%= staff_member.last_name %></td>
+        <td><%= staff_member.profile_picture %></td>
+        <td><%= staff_member.contact %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.staff_member_show_path(@socket, :show, staff_member) %></span>
+          <span><%= live_patch "Edit", to: Routes.staff_member_index_path(@socket, :edit, staff_member) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: staff_member.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Staff member", to: Routes.staff_member_index_path(@socket, :new) %></span>

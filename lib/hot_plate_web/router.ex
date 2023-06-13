@@ -4,34 +4,41 @@ defmodule HotPlateWeb.Router do
   import HotPlateWeb.CompanyAuth
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, {HotPlateWeb.LayoutView, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-    plug :fetch_current_company
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_live_flash)
+    plug(:put_root_layout, {HotPlateWeb.LayoutView, :root})
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
+    plug(:fetch_current_company)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", HotPlateWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
-    get "/", PageController, :index
+    get("/", PageController, :index)
   end
 
   scope "/", HotPlateWeb do
-    pipe_through [:browser, :require_authenticated_company]
-    live "/dashboard", DashboardLive.Index, :index
-    live "/restaurants", RestaurantLive.Index, :index
-    live "/restaurants/new", RestaurantLive.Index, :new
-    live "/restaurants/:id/edit", RestaurantLive.Index, :edit
+    pipe_through([:browser, :require_authenticated_company])
+    live("/dashboard", DashboardLive.Index, :index)
+    live("/restaurants", RestaurantLive.Index, :index)
+    live("/restaurants/new", RestaurantLive.Index, :new)
+    live("/restaurants/:id/edit", RestaurantLive.Index, :edit)
 
-    live "/restaurants/:id", RestaurantLive.Show, :show
-    live "/restaurants/:id/show/edit", RestaurantLive.Show, :edit
+    live("/restaurants/:id", RestaurantLive.Show, :show)
+    live("/restaurants/:id/show/edit", RestaurantLive.Show, :edit)
+
+    live("/staff_members", StaffMemberLive.Index, :index)
+    live("/staff_members/new", StaffMemberLive.Index, :new)
+    live("/staff_members/:id/edit", StaffMemberLive.Index, :edit)
+
+    live("/staff_members/:id", StaffMemberLive.Show, :show)
+    live("/staff_members/:id/show/edit", StaffMemberLive.Show, :edit)
   end
 
   # Other scopes may use custom stacks.
@@ -50,9 +57,9 @@ defmodule HotPlateWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      live_dashboard "/dashboard", metrics: HotPlateWeb.Telemetry
+      live_dashboard("/dashboard", metrics: HotPlateWeb.Telemetry)
     end
   end
 
@@ -62,42 +69,42 @@ defmodule HotPlateWeb.Router do
   # node running the Phoenix server.
   if Mix.env() == :dev do
     scope "/dev" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+      forward("/mailbox", Plug.Swoosh.MailboxPreview)
     end
   end
 
   ## Authentication routes
 
   scope "/", HotPlateWeb do
-    pipe_through [:browser, :redirect_if_company_is_authenticated]
+    pipe_through([:browser, :redirect_if_company_is_authenticated])
 
-    get "/companies/register", CompanyRegistrationController, :new
-    post "/companies/register", CompanyRegistrationController, :create
-    get "/companies/log_in", CompanySessionController, :new
-    post "/companies/log_in", CompanySessionController, :create
-    get "/companies/reset_password", CompanyResetPasswordController, :new
-    post "/companies/reset_password", CompanyResetPasswordController, :create
-    get "/companies/reset_password/:token", CompanyResetPasswordController, :edit
-    put "/companies/reset_password/:token", CompanyResetPasswordController, :update
+    get("/companies/register", CompanyRegistrationController, :new)
+    post("/companies/register", CompanyRegistrationController, :create)
+    get("/companies/log_in", CompanySessionController, :new)
+    post("/companies/log_in", CompanySessionController, :create)
+    get("/companies/reset_password", CompanyResetPasswordController, :new)
+    post("/companies/reset_password", CompanyResetPasswordController, :create)
+    get("/companies/reset_password/:token", CompanyResetPasswordController, :edit)
+    put("/companies/reset_password/:token", CompanyResetPasswordController, :update)
   end
 
   scope "/", HotPlateWeb do
-    pipe_through [:browser, :require_authenticated_company]
+    pipe_through([:browser, :require_authenticated_company])
 
-    get "/companies/settings", CompanySettingsController, :edit
-    put "/companies/settings", CompanySettingsController, :update
-    get "/companies/settings/confirm_email/:token", CompanySettingsController, :confirm_email
+    get("/companies/settings", CompanySettingsController, :edit)
+    put("/companies/settings", CompanySettingsController, :update)
+    get("/companies/settings/confirm_email/:token", CompanySettingsController, :confirm_email)
   end
 
   scope "/", HotPlateWeb do
-    pipe_through [:browser]
+    pipe_through([:browser])
 
-    delete "/companies/log_out", CompanySessionController, :delete
-    get "/companies/confirm", CompanyConfirmationController, :new
-    post "/companies/confirm", CompanyConfirmationController, :create
-    get "/companies/confirm/:token", CompanyConfirmationController, :edit
-    post "/companies/confirm/:token", CompanyConfirmationController, :update
+    delete("/companies/log_out", CompanySessionController, :delete)
+    get("/companies/confirm", CompanyConfirmationController, :new)
+    post("/companies/confirm", CompanyConfirmationController, :create)
+    get("/companies/confirm/:token", CompanyConfirmationController, :edit)
+    post("/companies/confirm/:token", CompanyConfirmationController, :update)
   end
 end
