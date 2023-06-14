@@ -7,7 +7,7 @@
 
   <%= link(
     to: Routes.dashboard_index_path(@socket, :index),
-    class: "flex flex-col justify-center my-2 items-center bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out  duration-500 gap-2"
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out  duration-500 gap-2"
   ) do %>
     <img
       src={Routes.static_path(@socket, "/images/homedashboardicon.png")}
@@ -21,7 +21,7 @@
 
   <%= link(
     to: Routes.restaurant_index_path(@socket, :index),
-    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+    class: "flex flex-col justify-center my-2 items-center bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
   ) do %>
     <img
       src={Routes.static_path(@socket, "/images/restauranticon.png")}

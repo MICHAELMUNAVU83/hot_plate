@@ -1,66 +1,158 @@
-<h1>Listing Foods</h1>
+<div class="h-[100vh] fixed w-[130px] flex flex-col items-center pt-4 bg-[#1F2028]">
+  <img
+    src={Routes.static_path(@socket, "/images/logo.png")}
+    alt="doctor"
+    class="w-[100px]  m-4 object-cover"
+  />
 
-<%= if @live_action in [:new, :edit] do %>
-  <.modal return_to={Routes.food_index_path(@socket, :index)}>
-    <.live_component
-      module={HotPlateWeb.FoodLive.FormComponent}
-      id={@food.id || :new}
-      title={@page_title}
-      action={@live_action}
-      food={@food}
-      company={@company}
-      restaurants={@restaurants}
-      return_to={Routes.food_index_path(@socket, :index)}
+  <%= link(
+    to: Routes.dashboard_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out  duration-500 gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/homedashboardicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
     />
-  </.modal>
-<% end %>
+    <p class="text-[#F2F2F2] text-[10px]">
+      Dashboard
+    </p>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Ready time</th>
-      <th>Pax</th>
-      <th>Status</th>
+  <%= link(
+    to: Routes.restaurant_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/restauranticon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Restaurant
+    </p>
+  <% end %>
 
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody id="foods">
-    <%= for food <- @foods do %>
-      <tr id={"food-#{food.id}"}>
-        <td>
-          <img
-            src={food.image}
-            alt="art image"
-            style="width: 100px; height: 100px; object-fit: cover;"
-          />
-        </td>
-        <td><%= food.name %></td>
-        <td><%= food.price %></td>
-        <td><%= food.ready_time %></td>
-        <td><%= food.pax %></td>
-        <td><%= food.status %></td>
+  <%= link(
+    to: Routes.staff_member_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500   gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/stafficon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Staff
+    </p>
+  <% end %>
 
-        <td>
-          <span>
-            <%= live_redirect("Show", to: Routes.food_show_path(@socket, :show, food)) %>
-          </span>
-          <span><%= live_patch("Edit", to: Routes.food_index_path(@socket, :edit, food)) %></span>
-          <span>
-            <%= link("Delete",
-              to: "#",
-              phx_click: "delete",
-              phx_value_id: food.id,
-              data: [confirm: "Are you sure?"]
-            ) %>
-          </span>
-        </td>
-      </tr>
+  <%= link(
+    to: Routes.food_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/foodsicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Menu
+    </p>
+  <% end %>
+
+  <%= link( to: Routes.company_settings_path(@socket, :edit) , class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2") do %>
+    <img
+      src={Routes.static_path(@socket, "/images/profileicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Profile
+    </p>
+  <% end %>
+
+  <%= link( to: Routes.company_session_path(@socket, :delete), method: :delete , class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2") do %>
+    <img
+      src={Routes.static_path(@socket, "/images/logouticon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Logout
+    </p>
+  <% end %>
+</div>
+
+<div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
+  <div class="bg-[#1F2028] min-h-[100vh] p-4   rounded-lg">
+    <h1>Listing Foods</h1>
+
+    <%= if @live_action in [:new, :edit] do %>
+      <.modal return_to={Routes.food_index_path(@socket, :index)}>
+        <.live_component
+          module={HotPlateWeb.FoodLive.FormComponent}
+          id={@food.id || :new}
+          title={@page_title}
+          action={@live_action}
+          food={@food}
+          company={@company}
+          restaurants={@restaurants}
+          return_to={Routes.food_index_path(@socket, :index)}
+        />
+      </.modal>
     <% end %>
-  </tbody>
-</table>
 
-<span><%= live_patch("New Food", to: Routes.food_index_path(@socket, :new)) %></span>
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Ready time</th>
+          <th>Pax</th>
+          <th>Status</th>
+
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="foods">
+        <%= for food <- @foods do %>
+          <tr id={"food-#{food.id}"}>
+            <td>
+              <img
+                src={food.image}
+                alt="art image"
+                style="width: 100px; height: 100px; object-fit: cover;"
+              />
+            </td>
+            <td><%= food.name %></td>
+            <td><%= food.price %></td>
+            <td><%= food.ready_time %></td>
+            <td><%= food.pax %></td>
+            <td><%= food.status %></td>
+
+            <td>
+              <span>
+                <%= live_redirect("Show", to: Routes.food_show_path(@socket, :show, food)) %>
+              </span>
+              <span>
+                <%= live_patch("Edit", to: Routes.food_index_path(@socket, :edit, food)) %>
+              </span>
+              <span>
+                <%= link("Delete",
+                  to: "#",
+                  phx_click: "delete",
+                  phx_value_id: food.id,
+                  data: [confirm: "Are you sure?"]
+                ) %>
+              </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <span><%= live_patch("New Food", to: Routes.food_index_path(@socket, :new)) %></span>
+  </div>
+</div>
