@@ -72,16 +72,15 @@
 }
 
 .phx-modal-close {
-  color: white!important;
+  color: white !important;
   float: right;
   font-size: 28px;
   font-weight: bold;
- 
 }
 
 .phx-modal-close:hover,
 .phx-modal-close:focus {
-  color: white!important;
+  color: white !important;
   text-decoration: none;
   cursor: pointer;
 }
@@ -151,4 +150,12 @@
 
 .overlay {
   z-index: 1;
+}
+
+.z1 {
+  z-index: 1;
+}
+
+.z2 {
+  z-index: 8;
 }

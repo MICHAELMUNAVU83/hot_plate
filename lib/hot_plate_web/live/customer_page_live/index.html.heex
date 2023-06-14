@@ -1,1 +1,36 @@
-fxcgvhb
+<img
+  src={Routes.static_path(@socket, "/images/customerpagebg.jpg")}
+  alt="customerpagebg"
+  class="w-[100%]  h-[200px]  object-cover"
+/>
+<div class="rounded-t-3xl  w-[100%] absolute top-[150px] z-20 bg-[#191A23] text-white min-h-[100vh] p-4">
+  <div class="flex  flex-col justify-start">
+    <p class="text-xl font-bold">
+      NextGen Food Court
+    </p>
+    <p class="text-sm">
+      Browse through all the restraunts and menus and order your favourite food
+    </p>
+    <p class="text-sm text-[#F36363] font-bold">
+      Powered by GS1 Kenya
+    </p>
+  </div>
+
+  <div class="grid grid-cols-2 mt-8 gap-4">
+    <%= for restaurant <- @restaurants do %>
+      <div class="bg-[#1F2028] flex flex-col gap-2 items-start   rounded-2xl h-[200px] p-2">
+        <img
+          src={Routes.static_path(@socket, "/images/customerpagebg.jpg")}
+          alt="customerpagebg"
+          class="w-[100%]  h-[100px] rounded-md  object-cover"
+        />
+        <p class="text-[#F36363]  font-bold">
+          <%= restaurant.name %>
+        </p>
+        <p class="text-sm">
+          <%= length(restaurant.foods) %> Menu Items
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

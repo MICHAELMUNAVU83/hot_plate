@@ -19,6 +19,7 @@ defmodule HotPlate.Restaurants do
   """
   def list_restaurants do
     Repo.all(Restaurant)
+    |> Repo.preload(:foods)
   end
 
   def list_restaurants_by_company(company_id) do
