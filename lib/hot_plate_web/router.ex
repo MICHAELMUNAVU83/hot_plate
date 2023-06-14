@@ -21,6 +21,7 @@ defmodule HotPlateWeb.Router do
     pipe_through(:browser)
 
     get("/", PageController, :index)
+    live("/customer_page", CustomerPageLive.Index, :index)
   end
 
   scope "/", HotPlateWeb do
