@@ -1,0 +1,63 @@
+<div class="h-[100vh] fixed w-[130px] flex flex-col items-center pt-4 bg-[#1F2028]">
+  <img
+    src={Routes.static_path(@socket, "/images/logo.png")}
+    alt="doctor"
+    class="w-[100px]  m-4 object-cover"
+  />
+
+  <%= link(
+    to: Routes.dashboard_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out  duration-500 gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/homedashboardicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Dashboard
+    </p>
+  <% end %>
+
+  <%= link(
+    to: Routes.restaurant_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/restauranticon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Restaurant
+    </p>
+  <% end %>
+
+  <%= link(
+    to: Routes.staff_member_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500   gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/stafficon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Staff
+    </p>
+  <% end %>
+
+  <%= link(
+    to: Routes.food_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/foodsicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Menu
+    </p>
+  <% end %>
+</div>

@@ -1,5 +1,7 @@
 defmodule HotPlateWeb.DashboardLive.Index do
   use HotPlateWeb, :live_view
+  import Phoenix.LiveView
+  import Phoenix.View
 
   @impl true
   def mount(_params, _session, socket) do

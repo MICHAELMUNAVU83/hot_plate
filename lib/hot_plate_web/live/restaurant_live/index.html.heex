@@ -1,70 +1,144 @@
-<h1>Listing Restaurants</h1>
+<div class="h-[100vh] fixed w-[130px] flex flex-col items-center pt-4 bg-[#1F2028]">
+  <img
+    src={Routes.static_path(@socket, "/images/logo.png")}
+    alt="doctor"
+    class="w-[100px]  m-4 object-cover"
+  />
 
-<%= if @live_action in [:new, :edit] do %>
-  <.modal return_to={Routes.restaurant_index_path(@socket, :index)}>
-    <.live_component
-      module={HotPlateWeb.RestaurantLive.FormComponent}
-      id={@restaurant.id || :new}
-      title={@page_title}
-      action={@live_action}
-      restaurant={@restaurant}
-      company={@company}
-      return_to={Routes.restaurant_index_path(@socket, :index)}
+  <%= link(
+    to: Routes.dashboard_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out  duration-500 gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/homedashboardicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
     />
-  </.modal>
-<% end %>
+    <p class="text-[#F2F2F2] text-[10px]">
+      Dashboard
+    </p>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Location</th>
+  <%= link(
+    to: Routes.restaurant_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/restauranticon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Restaurant
+    </p>
+  <% end %>
 
-      <th>Longitude</th>
-      <th>Latitude</th>
+  <%= link(
+    to: Routes.staff_member_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500   gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/stafficon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Staff
+    </p>
+  <% end %>
 
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody id="restaurants">
-    <%= for restaurant <- @restaurants do %>
-      <tr id={"restaurant-#{restaurant.id}"}>
-        <td>
-          <img
-            src={restaurant.logo}
-            alt="art image"
-            style="width: 100px; height: 100px; object-fit: cover;"
-          />
-        </td>
-        <td><%= restaurant.name %></td>
-        <td><%= restaurant.description %></td>
-        <td><%= restaurant.status %></td>
-        <td><%= restaurant.location %></td>
-        <td><%= restaurant.longitude %></td>
-        <td><%= restaurant.latitude %></td>
+  <%= link(
+    to: Routes.food_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/foodsicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Menu
+    </p>
+  <% end %>
+</div>
 
-        <td>
-          <span>
-            <%= live_redirect("Show", to: Routes.restaurant_show_path(@socket, :show, restaurant)) %>
-          </span>
-          <span>
-            <%= live_patch("Edit", to: Routes.restaurant_index_path(@socket, :edit, restaurant)) %>
-          </span>
-          <span>
-            <%= link("Delete",
-              to: "#",
-              phx_click: "delete",
-              phx_value_id: restaurant.id,
-              data: [confirm: "Are you sure?"]
-            ) %>
-          </span>
-        </td>
-      </tr>
+<div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
+  <div class="bg-[#1F2028] min-h-[100vh] p-4  text-white rounded-lg">
+    <h1>Listing Restaurants</h1>
+
+    <%= if @live_action in [:new, :edit] do %>
+      <.modal return_to={Routes.restaurant_index_path(@socket, :index)}>
+        <.live_component
+          module={HotPlateWeb.RestaurantLive.FormComponent}
+          id={@restaurant.id || :new}
+          title={@page_title}
+          action={@live_action}
+          restaurant={@restaurant}
+          company={@company}
+          return_to={Routes.restaurant_index_path(@socket, :index)}
+        />
+      </.modal>
     <% end %>
-  </tbody>
-</table>
 
-<span><%= live_patch("New Restaurant", to: Routes.restaurant_index_path(@socket, :new)) %></span>
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Location</th>
+
+          <th>Longitude</th>
+          <th>Latitude</th>
+
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="restaurants">
+        <%= for restaurant <- @restaurants do %>
+          <tr id={"restaurant-#{restaurant.id}"}>
+            <td>
+              <img
+                src={restaurant.logo}
+                alt="art image"
+                style="width: 100px; height: 100px; object-fit: cover;"
+              />
+            </td>
+            <td><%= restaurant.name %></td>
+            <td><%= restaurant.description %></td>
+            <td><%= restaurant.status %></td>
+            <td><%= restaurant.location %></td>
+            <td><%= restaurant.longitude %></td>
+            <td><%= restaurant.latitude %></td>
+
+            <td>
+              <span>
+                <%= live_redirect("Show",
+                  to: Routes.restaurant_show_path(@socket, :show, restaurant)
+                ) %>
+              </span>
+              <span>
+                <%= live_patch("Edit",
+                  to: Routes.restaurant_index_path(@socket, :edit, restaurant)
+                ) %>
+              </span>
+              <span>
+                <%= link("Delete",
+                  to: "#",
+                  phx_click: "delete",
+                  phx_value_id: restaurant.id,
+                  data: [confirm: "Are you sure?"]
+                ) %>
+              </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <span>
+      <%= live_patch("New Restaurant", to: Routes.restaurant_index_path(@socket, :new)) %>
+    </span>
+  </div>
+</div>
