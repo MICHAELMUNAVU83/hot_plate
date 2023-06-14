@@ -18,11 +18,11 @@
 
   <div class="grid grid-cols-2 mt-8 gap-4">
     <%= for restaurant <- @restaurants do %>
-      <div class="bg-[#1F2028] flex flex-col gap-2 items-start   rounded-2xl h-[200px] p-2">
+      <div class="bg-[#1F2028] flex flex-col gap-2 items-start   rounded-2xl md:h-[400px] h-[200px] p-2">
         <img
           src={Routes.static_path(@socket, "/images/customerpagebg.jpg")}
           alt="customerpagebg"
-          class="w-[100%]  h-[100px] rounded-md  object-cover"
+          class="w-[100%]  md:h-[300px] h-[100px] rounded-md  object-cover"
         />
         <p class="text-[#F36363]  font-bold">
           <%= restaurant.name %>
@@ -30,6 +30,10 @@
         <p class="text-sm">
           <%= length(restaurant.foods) %> Menu Items
         </p>
+        <%= link("View Menu",
+          to: Routes.customer_restaurant_show_path(@socket, :show, restaurant),
+          class: "text-sm text-[#F36363] font-bold"
+        ) %>
       </div>
     <% end %>
   </div>

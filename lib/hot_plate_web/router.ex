@@ -22,6 +22,7 @@ defmodule HotPlateWeb.Router do
 
     get("/", PageController, :index)
     live("/customer_page", CustomerPageLive.Index, :index)
+    live("/customerrestaurants/:id", CustomerRestaurantLive.Show, :show)
   end
 
   scope "/", HotPlateWeb do

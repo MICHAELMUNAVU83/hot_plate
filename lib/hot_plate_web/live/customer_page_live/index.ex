@@ -4,8 +4,6 @@ defmodule HotPlateWeb.CustomerPageLive.Index do
 
   @impl true
   def mount(_params, session, socket) do
-
-
     {:ok,
      socket
      |> assign(:restaurants, Restaurants.list_restaurants())}
