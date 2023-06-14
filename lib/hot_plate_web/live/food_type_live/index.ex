@@ -13,12 +13,7 @@ defmodule HotPlateWeb.FoodTypeLive.Index do
     {:ok,
      socket
      |> assign(:company, company)
-     |> assign(:food_types, FoodTypes.list_food_types_by_company(company.id))
-     |> assign(
-       :restaurants,
-       Restaurants.list_restaurants()
-       |> Enum.map(fn restaurant -> {restaurant.name, restaurant.id} end)
-     )}
+     |> assign(:food_types, FoodTypes.list_food_types())}
   end
 
   @impl true
@@ -50,7 +45,7 @@ defmodule HotPlateWeb.FoodTypeLive.Index do
     {:ok, _} = FoodTypes.delete_food_type(food_type)
     company = socket.assigns.company
 
-    {:noreply, assign(socket, :food_types, FoodTypes.list_food_types_by_company(company.id))}
+    {:noreply, assign(socket, :food_types, FoodTypes.list_food_types())}
   end
 
   defp list_food_types do

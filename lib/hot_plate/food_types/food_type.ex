@@ -6,8 +6,6 @@ defmodule HotPlate.FoodTypes.FoodType do
     field(:type_image, :string)
     field(:type_of_food, :string)
     has_many(:foods, HotPlate.Foods.Food, on_delete: :delete_all)
-    belongs_to(:company, HotPlate.Companies.Company)
-    belongs_to(:restaurant, HotPlate.Restaurants.Restaurant)
 
     timestamps()
   end
@@ -15,7 +13,7 @@ defmodule HotPlate.FoodTypes.FoodType do
   @doc false
   def changeset(food_type, attrs) do
     food_type
-    |> cast(attrs, [:type_of_food, :type_image, :company_id, :restaurant_id])
-    |> validate_required([:type_of_food, :type_image, :company_id, :restaurant_id])
+    |> cast(attrs, [:type_of_food, :type_image])
+    |> validate_required([:type_of_food, :type_image])
   end
 end

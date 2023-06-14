@@ -57,7 +57,7 @@
       class="w-[20px] h-[20px] object-cover"
     />
     <p class="text-[#F2F2F2] text-[10px]">
-      Food
+      Food Types
     </p>
   <% end %>
 
@@ -100,6 +100,47 @@
 
 <div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
   <div class="bg-[#1F2028] min-h-[100vh] p-4  text-white rounded-lg">
-    This will have dashboard data
+    <div class="grid grid-cols-4 p-4 gap-4">
+      <div class="bg-white rounded-2xl h-[200px]">
+        <div class="p-2  flex flex-col items-end justify-start ">
+          <p class="text-[#F36363]  text-2xl font-bold">
+            Restaurants
+          </p>
+          <p class="text-black text-[100px]">
+            <%= length(@restaurants) %>
+          </p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl  h-[200px]">
+        <div class="p-2  flex flex-col items-end justify-start ">
+          <p class="text-[#F36363]  text-2xl font-bold">
+            Food Types
+          </p>
+          <p class="text-black text-[100px]">
+            <%= length(@food_types) %>
+          </p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl  h-[200px]">
+        <div class="p-2  flex flex-col items-end justify-start ">
+          <p class="text-[#F36363]  text-2xl font-bold">
+            Staff
+          </p>
+          <p class="text-black text-[100px]">
+            <%= length(@staff_members) %>
+          </p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl  h-[200px]">
+        <div class="p-2  flex flex-col items-end justify-start ">
+          <p class="text-[#F36363]  text-2xl font-bold">
+            Food
+          </p>
+          <p class="text-black text-[100px]">
+            <%= length(@foods) %>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

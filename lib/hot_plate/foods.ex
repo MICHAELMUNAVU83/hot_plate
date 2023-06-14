@@ -20,6 +20,7 @@ defmodule HotPlate.Foods do
   def list_foods do
     Repo.all(Food)
     |> Repo.preload(:food_type)
+    |> Repo.preload(:restaurant)
   end
 
   def list_foods_by_company(company_id) do

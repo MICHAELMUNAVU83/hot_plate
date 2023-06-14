@@ -38,9 +38,7 @@ defmodule HotPlateWeb.FoodTypeLive.FormComponent do
 
     {:noreply, update(socket, :uploaded_files, &(&1 ++ uploaded_files))}
 
-    new_food_type_params =
-      Map.put(food_type_params, "type_image", List.first(uploaded_files))
-      |> Map.put("company_id", socket.assigns.company.id)
+    new_food_type_params = Map.put(food_type_params, "type_image", List.first(uploaded_files))
 
     save_food_type(socket, socket.assigns.action, new_food_type_params)
   end

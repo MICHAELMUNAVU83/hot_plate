@@ -20,25 +20,12 @@
         </div>
 
         <div class="flex gap-2 flex-col w-[48%]">
-          <%= label(f, :restaurant_id, class: "text-[#F36363]") %>
-          <%= select(
-            f,
-            :restaurant_id,
-            @restaurants,
-            prompt: "Select a Restaurant",
+          <%= label(f, :typpe_image, class: "text-[#F36363]") %>
+          <%= live_file_input(@uploads.food_type_image,
             class:
-              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 bg-white focus:outline-[#F36363]"
           ) %>
-
-          <%= error_tag(f, :restaurant_id) %>
         </div>
-      </div>
-      <div class="flex gap-2 flex-col w-[100%]">
-        <%= label(f, :typpe_image, class: "text-[#F36363]") %>
-        <%= live_file_input(@uploads.food_type_image,
-          class:
-            "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 bg-white focus:outline-[#F36363]"
-        ) %>
       </div>
 
       <%= for entry <- @uploads.food_type_image.entries do %>
