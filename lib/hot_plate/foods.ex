@@ -19,6 +19,7 @@ defmodule HotPlate.Foods do
   """
   def list_foods do
     Repo.all(Food)
+    |> Repo.preload(:food_type)
   end
 
   @doc """

@@ -10,6 +10,8 @@ defmodule HotPlate.Restaurants.Restaurant do
     field(:name, :string)
     field(:logo, :string)
     field(:status, :string)
+    field(:contact_person_name, :string)
+    field(:contact_person_phone_number, :string)
     belongs_to(:company, HotPlate.Companies.Company)
 
     timestamps()
@@ -26,7 +28,9 @@ defmodule HotPlate.Restaurants.Restaurant do
       :latitude,
       :logo,
       :company_id,
-      :status
+      :status,
+      :contact_person_name,
+      :contact_person_phone_number
     ])
     |> validate_required([
       :name,
@@ -36,7 +40,9 @@ defmodule HotPlate.Restaurants.Restaurant do
       :latitude,
       :logo,
       :status,
-      :company_id
+      :company_id,
+      :contact_person_name,
+      :contact_person_phone_number
     ])
   end
 end

@@ -10,6 +10,8 @@ defmodule HotPlate.Repo.Migrations.CreateRestaurants do
       add(:latitude, :integer)
       add(:logo, :string)
       add(:status, :string)
+      add(:contact_person_name, :string)
+      add(:contact_person_phone_number, :string)
       add(:company_id, references(:companies, on_delete: :nothing))
 
       timestamps()
