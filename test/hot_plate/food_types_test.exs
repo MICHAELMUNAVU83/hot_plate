@@ -34,7 +34,11 @@ defmodule HotPlate.FoodTypesTest do
 
     test "update_food_type/2 with valid data updates the food_type" do
       food_type = food_type_fixture()
-      update_attrs = %{type_image: "some updated type_image", type_of_food: "some updated type_of_food"}
+
+      update_attrs = %{
+        type_image: "some updated type_image",
+        type_of_food: "some updated type_of_food"
+      }
 
       assert {:ok, %FoodType{} = food_type} = FoodTypes.update_food_type(food_type, update_attrs)
       assert food_type.type_image == "some updated type_image"

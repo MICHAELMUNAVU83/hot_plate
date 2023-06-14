@@ -5,7 +5,10 @@ defmodule HotPlateWeb.FoodTypeLiveTest do
   import HotPlate.FoodTypesFixtures
 
   @create_attrs %{type_image: "some type_image", type_of_food: "some type_of_food"}
-  @update_attrs %{type_image: "some updated type_image", type_of_food: "some updated type_of_food"}
+  @update_attrs %{
+    type_image: "some updated type_image",
+    type_of_food: "some updated type_of_food"
+  }
   @invalid_attrs %{type_image: nil, type_of_food: nil}
 
   defp create_food_type(_) do

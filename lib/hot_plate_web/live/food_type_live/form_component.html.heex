@@ -7,18 +7,18 @@
     id="food_type-form"
     phx-target={@myself}
     phx-change="validate"
-    phx-submit="save">
-  
-    <%= label f, :type_of_food %>
-    <%= text_input f, :type_of_food %>
-    <%= error_tag f, :type_of_food %>
-  
-    <%= label f, :type_image %>
-    <%= text_input f, :type_image %>
-    <%= error_tag f, :type_image %>
-  
+    phx-submit="save"
+  >
+    <%= label(f, :type_of_food) %>
+    <%= text_input(f, :type_of_food) %>
+    <%= error_tag(f, :type_of_food) %>
+
+    <%= label(f, :type_image) %>
+    <%= text_input(f, :type_image) %>
+    <%= error_tag(f, :type_image) %>
+
     <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+      <%= submit("Save", phx_disable_with: "Saving...") %>
     </div>
   </.form>
 </div>

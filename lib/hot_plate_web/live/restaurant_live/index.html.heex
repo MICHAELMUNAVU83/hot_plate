@@ -48,6 +48,20 @@
   <% end %>
 
   <%= link(
+    to: Routes.food_type_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/fooditemicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Food Item
+    </p>
+  <% end %>
+
+  <%= link(
     to: Routes.food_index_path(@socket, :index),
     class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
   ) do %>
