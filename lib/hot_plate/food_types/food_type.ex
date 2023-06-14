@@ -3,11 +3,11 @@ defmodule HotPlate.FoodTypes.FoodType do
   import Ecto.Changeset
 
   schema "food_types" do
-    field :type_image, :string
-    field :type_of_food, :string
-    has_many :foods, HotPlate.Foods.Food
-    belongs_to :company, HotPlate.Companies.Company
-    belongs_to :restaurant, HotPlate.Restaurants.Restaurant
+    field(:type_image, :string)
+    field(:type_of_food, :string)
+    has_many(:foods, HotPlate.Foods.Food, on_delete: :delete_all)
+    belongs_to(:company, HotPlate.Companies.Company)
+    belongs_to(:restaurant, HotPlate.Restaurants.Restaurant)
 
     timestamps()
   end

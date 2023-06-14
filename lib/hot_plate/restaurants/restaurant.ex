@@ -13,6 +13,9 @@ defmodule HotPlate.Restaurants.Restaurant do
     field(:contact_person_name, :string)
     field(:contact_person_phone_number, :string)
     belongs_to(:company, HotPlate.Companies.Company)
+    has_many(:food_types, HotPlate.FoodTypes.FoodType, on_delete: :delete_all)
+    has_many(:foods, HotPlate.Foods.Food, on_delete: :delete_all)
+    has_many(:staff_members, HotPlate.StaffMembers.StaffMember, on_delete: :delete_all)
 
     timestamps()
   end
