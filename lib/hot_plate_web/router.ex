@@ -46,6 +46,13 @@ defmodule HotPlateWeb.Router do
 
     live "/foods/:id", FoodLive.Show, :show
     live "/foods/:id/show/edit", FoodLive.Show, :edit
+
+    live "/food_types", FoodTypeLive.Index, :index
+    live "/food_types/new", FoodTypeLive.Index, :new
+    live "/food_types/:id/edit", FoodTypeLive.Index, :edit
+
+    live "/food_types/:id", FoodTypeLive.Show, :show
+    live "/food_types/:id/show/edit", FoodTypeLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

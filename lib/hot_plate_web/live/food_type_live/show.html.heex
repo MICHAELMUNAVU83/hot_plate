@@ -1,0 +1,31 @@
+<h1>Show Food type</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.food_type_show_path(@socket, :show, @food_type)}>
+    <.live_component
+      module={HotPlateWeb.FoodTypeLive.FormComponent}
+      id={@food_type.id}
+      title={@page_title}
+      action={@live_action}
+      food_type={@food_type}
+      return_to={Routes.food_type_show_path(@socket, :show, @food_type)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Type of food:</strong>
+    <%= @food_type.type_of_food %>
+  </li>
+
+  <li>
+    <strong>Type image:</strong>
+    <%= @food_type.type_image %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.food_type_show_path(@socket, :edit, @food_type), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.food_type_index_path(@socket, :index) %></span>
