@@ -21,6 +21,11 @@ defmodule HotPlate.StaffMembers do
     Repo.all(StaffMember)
   end
 
+  def list_staff_members_by_company(company_id) do
+    Repo.all(from s in StaffMember, where: s.company_id == ^company_id)
+    |> Repo.preload(:restaurant)
+  end
+
   @doc """
   Gets a single staff_member.
 

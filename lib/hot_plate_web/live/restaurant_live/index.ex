@@ -9,7 +9,10 @@ defmodule HotPlateWeb.RestaurantLive.Index do
   def mount(_params, session, socket) do
     company = Companies.get_company_by_session_token(session["company_token"])
 
-    {:ok, socket |> assign(:company, company) |> assign(:restaurants, list_restaurants())}
+    {:ok,
+     socket
+     |> assign(:company, company)
+     |> assign(:restaurants, Restaurants.list_restaurants_by_company(company.id))}
   end
 
   @impl true
@@ -39,8 +42,9 @@ defmodule HotPlateWeb.RestaurantLive.Index do
   def handle_event("delete", %{"id" => id}, socket) do
     restaurant = Restaurants.get_restaurant!(id)
     {:ok, _} = Restaurants.delete_restaurant(restaurant)
+    company = socket.assigns.company
 
-    {:noreply, assign(socket, :restaurants, list_restaurants())}
+    {:noreply, assign(socket, :restaurants, Restaurants.list_restaurants_by_company(company.id))}
   end
 
   defp list_restaurants do

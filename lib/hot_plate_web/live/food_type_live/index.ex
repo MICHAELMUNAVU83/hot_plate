@@ -13,7 +13,7 @@ defmodule HotPlateWeb.FoodTypeLive.Index do
     {:ok,
      socket
      |> assign(:company, company)
-     |> assign(:food_types, list_food_types())
+     |> assign(:food_types, FoodTypes.list_food_types_by_company(company.id))
      |> assign(
        :restaurants,
        Restaurants.list_restaurants()
@@ -48,8 +48,9 @@ defmodule HotPlateWeb.FoodTypeLive.Index do
   def handle_event("delete", %{"id" => id}, socket) do
     food_type = FoodTypes.get_food_type!(id)
     {:ok, _} = FoodTypes.delete_food_type(food_type)
+    company = socket.assigns.company
 
-    {:noreply, assign(socket, :food_types, list_food_types())}
+    {:noreply, assign(socket, :food_types, FoodTypes.list_food_types_by_company(company.id))}
   end
 
   defp list_food_types do

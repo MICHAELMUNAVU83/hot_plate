@@ -22,6 +22,12 @@ defmodule HotPlate.Foods do
     |> Repo.preload(:food_type)
   end
 
+  def list_foods_by_company(company_id) do
+    Repo.all(from f in Food, where: f.company_id == ^company_id)
+    |> Repo.preload(:food_type)
+    |> Repo.preload(:restaurant)
+  end
+
   @doc """
   Gets a single food.
 

@@ -14,7 +14,7 @@ defmodule HotPlateWeb.FoodLive.Index do
     {:ok,
      socket
      |> assign(:company, company)
-     |> assign(:foods, list_foods())
+     |> assign(:foods, Foods.list_foods_by_company(company.id))
      |> assign(
        :restaurants,
        Restaurants.list_restaurants()
@@ -54,8 +54,9 @@ defmodule HotPlateWeb.FoodLive.Index do
   def handle_event("delete", %{"id" => id}, socket) do
     food = Foods.get_food!(id)
     {:ok, _} = Foods.delete_food(food)
+    company = socket.assigns.company
 
-    {:noreply, assign(socket, :foods, list_foods())}
+    {:noreply, assign(socket, :foods, Foods.list_foods_by_company(company.id))}
   end
 
   defp list_foods do

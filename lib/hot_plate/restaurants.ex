@@ -21,6 +21,10 @@ defmodule HotPlate.Restaurants do
     Repo.all(Restaurant)
   end
 
+  def list_restaurants_by_company(company_id) do
+    Repo.all(from r in Restaurant, where: r.company_id == ^company_id)
+  end
+
   @doc """
   Gets a single restaurant.
 

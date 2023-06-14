@@ -17,14 +17,23 @@ defmodule HotPlate.StaffMembers.StaffMember do
   @doc false
   def changeset(staff_member, attrs) do
     staff_member
-    |> cast(attrs, [:first_name, :last_name, :profile_picture, :contact, :status, :company_id])
+    |> cast(attrs, [
+      :first_name,
+      :last_name,
+      :profile_picture,
+      :contact,
+      :status,
+      :company_id,
+      :restaurant_id
+    ])
     |> validate_required([
       :first_name,
       :last_name,
       :profile_picture,
       :contact,
       :status,
-      :company_id
+      :company_id,
+      :restaurant_id
     ])
   end
 end

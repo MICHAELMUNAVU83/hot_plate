@@ -13,7 +13,7 @@ defmodule HotPlateWeb.StaffMemberLive.Index do
     {:ok,
      socket
      |> assign(:company, company)
-     |> assign(:staff_members, list_staff_members())
+     |> assign(:staff_members, StaffMembers.list_staff_members_by_company(company.id))
      |> assign(
        :restaurants,
        Restaurants.list_restaurants()
@@ -48,8 +48,10 @@ defmodule HotPlateWeb.StaffMemberLive.Index do
   def handle_event("delete", %{"id" => id}, socket) do
     staff_member = StaffMembers.get_staff_member!(id)
     {:ok, _} = StaffMembers.delete_staff_member(staff_member)
+    company = socket.assigns.company
 
-    {:noreply, assign(socket, :staff_members, list_staff_members())}
+    {:noreply,
+     assign(socket, :staff_members, StaffMembers.list_staff_members_by_company(company.id))}
   end
 
   defp list_staff_members do
