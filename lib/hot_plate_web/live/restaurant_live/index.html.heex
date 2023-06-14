@@ -60,6 +60,28 @@
       Menu
     </p>
   <% end %>
+
+  <%= link( to: Routes.company_settings_path(@socket, :edit) , class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2") do %>
+    <img
+      src={Routes.static_path(@socket, "/images/profileicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Profile
+    </p>
+  <% end %>
+
+  <%= link( to: Routes.company_session_path(@socket, :delete), method: :delete , class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2") do %>
+    <img
+      src={Routes.static_path(@socket, "/images/logouticon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Logout
+    </p>
+  <% end %>
 </div>
 
 <div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
