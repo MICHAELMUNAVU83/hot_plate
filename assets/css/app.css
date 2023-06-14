@@ -55,7 +55,7 @@
 .phx-modal {
   opacity: 1 !important;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   top: 0;
   width: 100%;
@@ -65,23 +65,23 @@
 }
 
 .phx-modal-content {
-  background-color: #fefefe;
+  background-color: #191a23;
   margin: 15vh auto;
   padding: 20px;
-  border: 1px solid #888;
   width: 80%;
 }
 
 .phx-modal-close {
-  color: #aaa;
+  color: white!important;
   float: right;
   font-size: 28px;
   font-weight: bold;
+ 
 }
 
 .phx-modal-close:hover,
 .phx-modal-close:focus {
-  color: black;
+  color: white!important;
   text-decoration: none;
   cursor: pointer;
 }
@@ -147,4 +147,8 @@
 
 .login-bg {
   background-image: url("/images/background.jpg");
+}
+
+.overlay {
+  z-index: 1;
 }

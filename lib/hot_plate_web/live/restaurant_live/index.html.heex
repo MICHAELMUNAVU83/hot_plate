@@ -63,9 +63,7 @@
 </div>
 
 <div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
-  <div class="bg-[#1F2028] min-h-[100vh] p-4  text-white rounded-lg">
-    <h1>Listing Restaurants</h1>
-
+  <div class="bg-[#1F2028] min-h-[100vh] p-4   rounded-lg">
     <%= if @live_action in [:new, :edit] do %>
       <.modal return_to={Routes.restaurant_index_path(@socket, :index)}>
         <.live_component
@@ -80,65 +78,101 @@
       </.modal>
     <% end %>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Status</th>
-          <th>Location</th>
+    <div class=" pt-12 mx-auto flex flex-col">
+      <div class="bg-[#F36363]  -mb-8  font-bold text-white text-xl rounded-md overlay  w-[90%]  mx-auto flex items-center p-4 py-8  h-[80px]">
+        Drivers
+      </div>
+      <div class="bg-white p-24   w-[95%]     overflow-x-auto  mx-auto flex flex-col gap-4  shadow-md    shadow-[#F36363]/50">
+        <%= live_patch("New Restaurant",
+          to: Routes.restaurant_index_path(@socket, :new),
+          class:
+            "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out  w-[25%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
+        ) %>
 
-          <th>Longitude</th>
-          <th>Latitude</th>
+        <table class="text-center ">
+          <thead>
+            <tr class="text-[#1F2028] text-center">
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Location</th>
 
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="restaurants">
-        <%= for restaurant <- @restaurants do %>
-          <tr id={"restaurant-#{restaurant.id}"}>
-            <td>
-              <img
-                src={restaurant.logo}
-                alt="art image"
-                style="width: 100px; height: 100px; object-fit: cover;"
-              />
-            </td>
-            <td><%= restaurant.name %></td>
-            <td><%= restaurant.description %></td>
-            <td><%= restaurant.status %></td>
-            <td><%= restaurant.location %></td>
-            <td><%= restaurant.longitude %></td>
-            <td><%= restaurant.latitude %></td>
+              <th>Longitude</th>
+              <th>Latitude</th>
 
-            <td>
-              <span>
-                <%= live_redirect("Show",
-                  to: Routes.restaurant_show_path(@socket, :show, restaurant)
-                ) %>
-              </span>
-              <span>
-                <%= live_patch("Edit",
-                  to: Routes.restaurant_index_path(@socket, :edit, restaurant)
-                ) %>
-              </span>
-              <span>
-                <%= link("Delete",
-                  to: "#",
-                  phx_click: "delete",
-                  phx_value_id: restaurant.id,
-                  data: [confirm: "Are you sure?"]
-                ) %>
-              </span>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-    <span>
-      <%= live_patch("New Restaurant", to: Routes.restaurant_index_path(@socket, :new)) %>
-    </span>
+          <tbody id="restaurants">
+            <%= for restaurant <- @restaurants do %>
+              <tr
+                id={"restaurant-#{restaurant.id}"}
+                class="text-[#191A23] border-b-2 border-[#F36363] "
+              >
+                <td class="py-2  flex items-center justify-center ">
+                  <img
+                    src={restaurant.logo}
+                    alt="art image"
+                    style="width: 100px; height: 100px;  object-fit: cover;"
+                    class="rounded-xl"
+                  />
+                </td>
+                <td class="py-2"><%= restaurant.name %></td>
+                <td class="py-2"><%= restaurant.description %></td>
+                <td class="py-2"><%= restaurant.status %></td>
+                <td class="py-2"><%= restaurant.location %></td>
+                <td class="py-2"><%= restaurant.longitude %></td>
+                <td class="py-2"><%= restaurant.latitude %></td>
+
+                <td class="py-2">
+                  <div class="flex justify-center gap-4">
+                    <div>
+                      <%= live_redirect(
+                      to: Routes.restaurant_show_path(@socket, :show, restaurant)
+                    ) do %>
+                        <img
+                          src={Routes.static_path(@socket, "/images/viewicon.png")}
+                          alt="restaurant"
+                          class="w-[20px] h-[20px] object-cover"
+                        />
+                      <% end %>
+                    </div>
+
+                    <div>
+                      <%= live_patch(
+                      to: Routes.restaurant_index_path(@socket, :edit, restaurant)
+                    )  do %>
+                        <img
+                          src={Routes.static_path(@socket, "/images/editicon.png")}
+                          alt="restaurant"
+                          class="w-[20px] h-[20px] object-cover"
+                        />
+                      <% end %>
+                    </div>
+
+                    <div>
+                      <%= link(
+                      to: "#",
+                      phx_click: "delete",
+                      phx_value_id: restaurant.id,
+                      data: [confirm: "Are you sure?"]
+                    ) do %>
+                        <img
+                          src={Routes.static_path(@socket, "/images/deleteicon.png")}
+                          alt="restaurant"
+                          class="w-[20px] h-[20px] object-cover"
+                        />
+                      <% end %>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

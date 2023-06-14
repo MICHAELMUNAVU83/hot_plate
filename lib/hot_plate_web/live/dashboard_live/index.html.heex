@@ -62,7 +62,7 @@
   <% end %>
 
   <%= link( to: Routes.company_settings_path(@socket, :edit) , class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2") do %>
-   <img
+    <img
       src={Routes.static_path(@socket, "/images/profileicon.png")}
       alt="restaurant"
       class="w-[20px] h-[20px] object-cover"
@@ -73,7 +73,7 @@
   <% end %>
 
   <%= link( to: Routes.company_session_path(@socket, :delete), method: :delete , class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2") do %>
-   <img
+    <img
       src={Routes.static_path(@socket, "/images/logouticon.png")}
       alt="restaurant"
       class="w-[20px] h-[20px] object-cover"

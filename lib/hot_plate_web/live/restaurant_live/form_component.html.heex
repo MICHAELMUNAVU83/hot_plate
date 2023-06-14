@@ -1,5 +1,5 @@
 <div>
-  <h2><%= @title %></h2>
+  <h2 class="text-[#F36363] font-bold text-xl">Add A  New Restaurant</h2>
 
   <.form
     let={f}
@@ -9,47 +9,109 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <%= label(f, :name) %>
-    <%= text_input(f, :name) %>
-    <%= error_tag(f, :name) %>
+    <div class="mt-4 p-4 gap-4 flex flex-col ">
+      <div class="flex w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :name, class: "text-[#F36363]") %>
+          <%= text_input(f, :name,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <p class="pt-5">
+            <%= error_tag(f, :name) %>
+          </p>
+        </div>
 
-    <%= label(f, :description) %>
-    <%= text_input(f, :description) %>
-    <%= error_tag(f, :description) %>
+        <div class="flex  gap-2 flex-col w-[48%]">
+          <%= label(f, :description, class: "text-[#F36363]") %>
+          <%= text_input(f, :description,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <p class="pt-5">
+            <%= error_tag(f, :description) %>
+          </p>
+        </div>
+      </div>
 
-    <%= label(f, :location) %>
-    <%= text_input(f, :location) %>
-    <%= error_tag(f, :location) %>
+      <div class="flex w-[100%] justify-between items-start">
+        <div class="flex  gap-2 flex-col w-[48%]">
+          <%= label(f, :location, class: "text-[#F36363]") %>
+          <%= text_input(f, :location,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <p class="pt-5">
+            <%= error_tag(f, :location) %>
+          </p>
+        </div>
 
-    <%= label(f, :longitude) %>
-    <%= number_input(f, :longitude) %>
-    <%= error_tag(f, :longitude) %>
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :longitude, class: "text-[#F36363]") %>
+          <%= number_input(f, :longitude,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <p class="pt-5">
+            <%= error_tag(f, :longitude) %>
+          </p>
+        </div>
+      </div>
 
-    <%= label(f, :latitude) %>
-    <%= number_input(f, :latitude) %>
-    <%= error_tag(f, :latitude) %>
+      <div class="flex w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :latitude, class: "text-[#F36363]") %>
+          <%= number_input(f, :latitude,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <p class="pt-5">
+            <%= error_tag(f, :latitude) %>
+          </p>
+        </div>
 
-    <%= label(f, :status) %>
-    <%= select(f, :status, ["open", "closed"], prompt: "Select Status") %>
-    <%= error_tag(f, :status) %>
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :status, class: "text-[#F36363]") %>
+          <%= select(f, :status, ["open", "closed"],
+            prompt: "Select Status",
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <p class="pt-5">
+            <%= error_tag(f, :status) %>
+          </p>
+        </div>
+      </div>
 
-    <%= label(f, :restaurant_logo) %>
-    <%= live_file_input(@uploads.restaurant_logo) %>
+      <div class="flex gap-2 flex-col w-[100%]">
+        <%= label(f, :restaurant_logo, class: "text-[#F36363]") %>
+        <%= live_file_input(@uploads.restaurant_logo,
+          class:
+            "p-2 text-black border-transparent bg-white focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+        ) %>
+        <p class="pt-5">
+          <%= error_tag(f, :restaurant_logo) %>
+        </p>
+      </div>
 
-    <%= for entry <- @uploads.restaurant_logo.entries do %>
-      <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
-      <button
-        type="button"
-        phx-click="cancel-upload"
-        phx-value-ref={entry.ref}
-        phx-target={@myself}
-      >
-        Cancel
-      </button>
-    <% end %>
+      <%= for entry <- @uploads.restaurant_logo.entries do %>
+        <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
+        <button
+          type="button"
+          phx-click="cancel-upload"
+          phx-value-ref={entry.ref}
+          phx-target={@myself}
+        >
+          Cancel
+        </button>
+      <% end %>
 
-    <div>
-      <%= submit("Save", phx_disable_with: "Saving...") %>
+      <div class="flex gap-2 flex-col w-[40%] mx-auto">
+        <%= submit("Save",
+          phx_disable_with: "Saving...",
+          class: "bg-[#F36363] text-white p-2 rounded-md"
+        ) %>
+      </div>
     </div>
   </.form>
 </div>
