@@ -1,5 +1,5 @@
 <div>
-  <h2><%= @title %></h2>
+  <h2 class="text-[#F36363] font-bold text-xl">Add A  New Food Item</h2>
 
   <.form
     let={f}
@@ -9,53 +9,99 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <%= label(f, :name) %>
-    <%= text_input(f, :name) %>
-    <%= error_tag(f, :name) %>
+    <div class="mt-4 p-4 gap-4 flex flex-col ">
+      <div class="flex w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :name, class: "text-[#F36363]") %>
+          <%= text_input(f, :name,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <%= error_tag(f, :name) %>
+        </div>
 
-    <%= label(f, :price) %>
-    <%= number_input(f, :price) %>
-    <%= error_tag(f, :price) %>
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :price, class: "text-[#F36363]") %>
+          <%= number_input(f, :price,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <%= error_tag(f, :price) %>
+        </div>
+      </div>
 
-    <%= label(f, :ready_time) %>
-    <%= text_input(f, :ready_time) %>
-    <%= error_tag(f, :ready_time) %>
+      <div class="flex w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :ready_time, class: "text-[#F36363]") %>
+          <%= text_input(f, :ready_time,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <%= error_tag(f, :ready_time) %>
+        </div>
 
-    <%= label(f, :pax) %>
-    <%= number_input(f, :pax) %>
-    <%= error_tag(f, :pax) %>
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :pax, class: "text-[#F36363]") %>
+          <%= number_input(f, :pax,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <%= error_tag(f, :pax) %>
+        </div>
+      </div>
 
-    <%= label(f, :status) %>
-    <%= select(f, :status, ["active", "inactive"], prompt: "Select Status") %>
-    <%= error_tag(f, :status) %>
+      <div class="flex w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :status, class: "text-[#F36363]") %>
+          <%= select(f, :status, ["active", "inactive"],
+            prompt: "Select Status",
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+          <%= error_tag(f, :status) %>
+        </div>
 
-    <%= label(f, :restaurant_id) %>
-    <%= select(
-      f,
-      :restaurant_id,
-      @restaurants,
-      prompt: "Select a Restaurant"
-    ) %>
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :restaurant_id, class: "text-[#F36363]") %>
+          <%= select(
+            f,
+            :restaurant_id,
+            @restaurants,
+            prompt: "Select a Restaurant",
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
 
-    <%= error_tag(f, :restaurant_id) %>
+          <%= error_tag(f, :restaurant_id) %>
+        </div>
+      </div>
 
-    <%= label(f, :food_image) %>
-    <%= live_file_input(@uploads.food_image) %>
+      <div class="flex gap-2 flex-col w-[100%]">
+        <%= label(f, :food_image, class: "text-[#F36363]") %>
+        <%= live_file_input(@uploads.food_image,
+          class:
+            "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 bg-white focus:outline-[#F36363]"
+        ) %>
+      </div>
 
-    <%= for entry <- @uploads.food_image.entries do %>
-      <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
-      <button
-        type="button"
-        phx-click="cancel-upload"
-        phx-value-ref={entry.ref}
-        phx-target={@myself}
-      >
-        Cancel
-      </button>
-    <% end %>
+      <%= for entry <- @uploads.food_image.entries do %>
+        <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
+        <button
+          type="button"
+          phx-click="cancel-upload"
+          phx-value-ref={entry.ref}
+          phx-target={@myself}
+        >
+          Cancel
+        </button>
+      <% end %>
 
-    <div>
-      <%= submit("Save", phx_disable_with: "Saving...") %>
+      <div class="flex gap-2 flex-col w-[30%] mx-auto">
+        <%= submit("Save",
+          phx_disable_with: "Saving...",
+          class: "bg-[#F36363] text-white p-2 rounded-md"
+        ) %>
+      </div>
     </div>
   </.form>
 </div>

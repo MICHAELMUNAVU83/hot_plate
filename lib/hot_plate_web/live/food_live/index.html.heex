@@ -7,7 +7,7 @@
 
   <%= link(
     to: Routes.dashboard_index_path(@socket, :index),
-    class: "flex flex-col justify-center my-2 items-center bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out  duration-500 gap-2"
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out  duration-500 gap-2"
   ) do %>
     <img
       src={Routes.static_path(@socket, "/images/homedashboardicon.png")}
@@ -49,7 +49,7 @@
 
   <%= link(
     to: Routes.food_index_path(@socket, :index),
-    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+    class: "flex flex-col justify-center my-2 items-center bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
   ) do %>
     <img
       src={Routes.static_path(@socket, "/images/foodsicon.png")}
@@ -86,8 +86,6 @@
 
 <div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
   <div class="bg-[#1F2028] min-h-[100vh] p-4   rounded-lg">
-    <h1>Listing Foods</h1>
-
     <%= if @live_action in [:new, :edit] do %>
       <.modal return_to={Routes.food_index_path(@socket, :index)}>
         <.live_component
@@ -103,56 +101,84 @@
       </.modal>
     <% end %>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Ready time</th>
-          <th>Pax</th>
-          <th>Status</th>
+    <div class=" pt-12 mx-auto flex flex-col">
+      <div class="bg-[#F36363]  -mb-8  font-bold text-white text-xl rounded-md overlay  w-[90%]  mx-auto flex items-center p-4 py-8  h-[80px]">
+        Food Items in your Menu
+      </div>
+      <div class="bg-white p-24   w-[95%]     overflow-x-auto  mx-auto flex flex-col gap-4  shadow-md    shadow-[#F36363]/50">
+        <%= live_patch("New Food Item",
+          to: Routes.food_index_path(@socket, :new),
+          class:
+            "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out  w-[25%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
+        ) %>
 
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="foods">
-        <%= for food <- @foods do %>
-          <tr id={"food-#{food.id}"}>
-            <td>
-              <img
-                src={food.image}
-                alt="art image"
-                style="width: 100px; height: 100px; object-fit: cover;"
-              />
-            </td>
-            <td><%= food.name %></td>
-            <td><%= food.price %></td>
-            <td><%= food.ready_time %></td>
-            <td><%= food.pax %></td>
-            <td><%= food.status %></td>
+        <table class="text-center ">
+          <thead>
+            <tr class="text-[#1F2028] text-center">
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Ready time</th>
+              <th>Pax</th>
+              <th>Status</th>
 
-            <td>
-              <span>
-                <%= live_redirect("Show", to: Routes.food_show_path(@socket, :show, food)) %>
-              </span>
-              <span>
-                <%= live_patch("Edit", to: Routes.food_index_path(@socket, :edit, food)) %>
-              </span>
-              <span>
-                <%= link("Delete",
-                  to: "#",
-                  phx_click: "delete",
-                  phx_value_id: food.id,
-                  data: [confirm: "Are you sure?"]
-                ) %>
-              </span>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="foods">
+            <%= for food <- @foods do %>
+              <tr id={"food-#{food.id}"} class="text-[#191A23] border-b-2 border-[#F36363] ">
+                <td class="py-2  flex items-center justify-center ">
+                  <img
+                    src={food.image}
+                    alt="art image"
+                    style="width: 100px; height: 100px; object-fit: cover;"
+                    class="rounded-xl"
+                  />
+                </td>
+                <td class="py-2"><%= food.name %></td>
+                <td class="py-2"><%= food.price %></td>
+                <td class="py-2"><%= food.ready_time %></td>
+                <td class="py-2"><%= food.pax %></td>
+                <td class="py-2"><%= food.status %></td>
 
-    <span><%= live_patch("New Food", to: Routes.food_index_path(@socket, :new)) %></span>
+                <td class="py-2">
+                  <div class="flex justify-center gap-4">
+                    <%= live_redirect( to: Routes.food_show_path(@socket, :show, food)) do %>
+                      <img
+                        src={Routes.static_path(@socket, "/images/viewicon.png")}
+                        alt="restaurant"
+                        class="w-[20px] h-[20px] object-cover"
+                      />
+                    <% end %>
+
+                    <%= live_patch( to: Routes.food_index_path(@socket, :edit, food)) do %>
+                      <img
+                        src={Routes.static_path(@socket, "/images/editicon.png")}
+                        alt="restaurant"
+                        class="w-[20px] h-[20px] object-cover"
+                      />
+                    <% end %>
+
+                    <%= link(
+                      to: "#",
+                      phx_click: "delete",
+                      phx_value_id: food.id,
+                      data: [confirm: "Are you sure?"]
+                    ) do %>
+                      <img
+                        src={Routes.static_path(@socket, "/images/deleteicon.png")}
+                        alt="restaurant"
+                        class="w-[20px] h-[20px] object-cover"
+                      />
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
