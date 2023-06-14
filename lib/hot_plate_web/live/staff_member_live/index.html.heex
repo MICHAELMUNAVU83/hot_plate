@@ -1,75 +1,193 @@
-<h1>Listing Staff members</h1>
+<div class="h-[100vh] fixed w-[130px] flex flex-col items-center pt-4 bg-[#1F2028]">
+  <img
+    src={Routes.static_path(@socket, "/images/logo.png")}
+    alt="doctor"
+    class="w-[100px]  m-4 object-cover"
+  />
 
-<%= if @live_action in [:new, :edit] do %>
-  <.modal return_to={Routes.staff_member_index_path(@socket, :index)}>
-    <.live_component
-      module={HotPlateWeb.StaffMemberLive.FormComponent}
-      id={@staff_member.id || :new}
-      title={@page_title}
-      action={@live_action}
-      staff_member={@staff_member}
-      company={@company}
-      restaurants={@restaurants}
-      return_to={Routes.staff_member_index_path(@socket, :index)}
+  <%= link(
+    to: Routes.dashboard_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out  duration-500 gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/homedashboardicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
     />
-  </.modal>
-<% end %>
+    <p class="text-[#F2F2F2] text-[10px]">
+      Dashboard
+    </p>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Profile picture</th>
-      <th>First name</th>
-      <th>Last name</th>
+  <%= link(
+    to: Routes.restaurant_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/restauranticon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Restaurant
+    </p>
+  <% end %>
 
-      <th>Contact</th>
+  <%= link(
+    to: Routes.staff_member_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500   gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/stafficon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Staff
+    </p>
+  <% end %>
 
-      <th>Status</th>
+  <%= link(
+    to: Routes.food_index_path(@socket, :index),
+    class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2"
+  ) do %>
+    <img
+      src={Routes.static_path(@socket, "/images/foodsicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Menu
+    </p>
+  <% end %>
 
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody id="staff_members">
-    <%= for staff_member <- @staff_members do %>
-      <tr id={"staff_member-#{staff_member.id}"}>
-        <td>
-          <img
-            src={staff_member.profile_picture}
-            alt="art image"
-            style="width: 100px; height: 100px; object-fit: cover;"
-          />
-        </td>
-        <td><%= staff_member.first_name %></td>
-        <td><%= staff_member.last_name %></td>
+  <%= link( to: Routes.company_settings_path(@socket, :edit) , class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2") do %>
+    <img
+      src={Routes.static_path(@socket, "/images/profileicon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Profile
+    </p>
+  <% end %>
 
-        <td><%= staff_member.contact %></td>
-        <td><%= staff_member.status %></td>
+  <%= link( to: Routes.company_session_path(@socket, :delete), method: :delete , class: "flex flex-col justify-center my-2 items-center hover:bg-[#F36363] w-[60%] mx-auto h-[80px] rounded-2xl hover:scale-105 transition-all ease-in-out duration-500  gap-2") do %>
+    <img
+      src={Routes.static_path(@socket, "/images/logouticon.png")}
+      alt="restaurant"
+      class="w-[20px] h-[20px] object-cover"
+    />
+    <p class="text-[#F2F2F2] text-[10px]">
+      Logout
+    </p>
+  <% end %>
+</div>
 
-        <td>
-          <span>
-            <%= live_redirect("Show",
-              to: Routes.staff_member_show_path(@socket, :show, staff_member)
-            ) %>
-          </span>
-          <span>
-            <%= live_patch("Edit",
-              to: Routes.staff_member_index_path(@socket, :edit, staff_member)
-            ) %>
-          </span>
-          <span>
-            <%= link("Delete",
-              to: "#",
-              phx_click: "delete",
-              phx_value_id: staff_member.id,
-              data: [confirm: "Are you sure?"]
-            ) %>
-          </span>
-        </td>
-      </tr>
+<div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
+  <div class="bg-[#1F2028] min-h-[100vh] p-4   rounded-lg">
+    <%= if @live_action in [:new, :edit] do %>
+      <.modal return_to={Routes.staff_member_index_path(@socket, :index)}>
+        <.live_component
+          module={HotPlateWeb.StaffMemberLive.FormComponent}
+          id={@staff_member.id || :new}
+          title={@page_title}
+          action={@live_action}
+          staff_member={@staff_member}
+          company={@company}
+          restaurants={@restaurants}
+          return_to={Routes.staff_member_index_path(@socket, :index)}
+        />
+      </.modal>
     <% end %>
-  </tbody>
-</table>
 
-<span>
-  <%= live_patch("New Staff member", to: Routes.staff_member_index_path(@socket, :new)) %>
-</span>
+    <div class=" pt-12 mx-auto flex flex-col">
+      <div class="bg-[#F36363]  -mb-8  font-bold text-white text-xl rounded-md overlay  w-[90%]  mx-auto flex items-center p-4 py-8  h-[80px]">
+        Staff Members
+      </div>
+
+      <div class="bg-white p-24   w-[95%]     overflow-x-auto  mx-auto flex flex-col gap-4  shadow-md    shadow-[#F36363]/50">
+        <%= live_patch("Staff Member",
+          to: Routes.staff_member_index_path(@socket, :new),
+          class:
+            "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out  w-[25%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
+        ) %>
+
+        <table class="text-center ">
+          <thead>
+            <tr class="text-[#1F2028] text-center">
+              <th>Profile picture</th>
+              <th>First name</th>
+              <th>Last name</th>
+
+              <th>Contact</th>
+
+              <th>Status</th>
+
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="staff_members">
+            <%= for staff_member <- @staff_members do %>
+              <tr
+                id={"staff_member-#{staff_member.id}"}
+                class="text-[#191A23] border-b-2 border-[#F36363] "
+              >
+                <td class="py-2  flex items-center justify-center ">
+                  <img
+                    src={staff_member.profile_picture}
+                    alt="art image"
+                    style="width: 100px; height: 100px; object-fit: cover;"
+                    class="rounded-xl"
+                  />
+                </td>
+                <td class="py-2"><%= staff_member.first_name %></td>
+                <td class="py-2"><%= staff_member.last_name %></td>
+
+                <td class="py-2"><%= staff_member.contact %></td>
+                <td class="py-2"><%= staff_member.status %></td>
+
+                <td class="py-2">
+                  <div class="flex justify-center gap-4">
+                    <%= live_redirect(
+                    to: Routes.staff_member_show_path(@socket, :show, staff_member)
+                  ) do %>
+                      <img
+                        src={Routes.static_path(@socket, "/images/viewicon.png")}
+                        alt="restaurant"
+                        class="w-[20px] h-[20px] object-cover"
+                      />
+                    <% end %>
+
+                    <%= live_patch(
+                    to: Routes.staff_member_index_path(@socket, :edit, staff_member)
+                  ) do %>
+                      <img
+                        src={Routes.static_path(@socket, "/images/editicon.png")}
+                        alt="restaurant"
+                        class="w-[20px] h-[20px] object-cover"
+                      />
+                    <% end %>
+
+                    <%= link(
+                    to: "#",
+                    phx_click: "delete",
+                    phx_value_id: staff_member.id,
+                    data: [confirm: "Are you sure?"]
+                  ) do %>
+                      <img
+                        src={Routes.static_path(@socket, "/images/deleteicon.png")}
+                        alt="restaurant"
+                        class="w-[20px] h-[20px] object-cover"
+                      />
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
