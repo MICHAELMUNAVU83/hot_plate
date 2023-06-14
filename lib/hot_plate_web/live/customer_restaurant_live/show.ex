@@ -2,10 +2,10 @@ defmodule HotPlateWeb.CustomerRestaurantLive.Show do
   use HotPlateWeb, :live_view
 
   alias HotPlate.Restaurants
+  alias HotPlate.FoodTypes
 
   @impl true
   def mount(_params, _session, socket) do
-    IO.puts("mounting")
     {:ok, socket}
   end
 
@@ -13,6 +13,7 @@ defmodule HotPlateWeb.CustomerRestaurantLive.Show do
   def handle_params(%{"id" => id}, _, socket) do
     {:noreply,
      socket
-     |> assign(:restaurant, Restaurants.get_restaurant!(id))}
+     |> assign(:restaurant, Restaurants.get_restaurant!(id))
+     |> assign(:food_types, FoodTypes.list_food_types())}
   end
 end

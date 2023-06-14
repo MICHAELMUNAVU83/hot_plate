@@ -3,7 +3,7 @@
   alt="customerpagebg"
   class="w-[100%]  h-[200px]  object-cover"
 />
-<div class="rounded-t-3xl  w-[100%] absolute top-[150px] z-20 bg-[#191A23] text-white min-h-[100vh] p-4">
+<div class="rounded-t-3xl  w-[100%] absolute top-[120px] z-20 bg-[#191A23] text-white min-h-[100vh] p-4">
   <div class="flex  flex-col justify-start">
     <p class="text-xl font-bold">
       NextGen Food Court
@@ -32,7 +32,7 @@
         </p>
         <%= link("View Menu",
           to: Routes.customer_restaurant_show_path(@socket, :show, restaurant),
-          class: "text-sm text-[#F36363] font-bold"
+          class: "text-sm text-[#F36363] underline"
         ) %>
       </div>
     <% end %>

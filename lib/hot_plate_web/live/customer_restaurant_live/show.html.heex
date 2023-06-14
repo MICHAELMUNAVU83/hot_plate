@@ -1,1 +1,30 @@
-yghujiko
+<img src={@restaurant.logo} alt="customerpagebg" class="w-[100%]  h-[200px]  object-cover" />
+<div class="rounded-t-3xl  w-[100%] absolute top-[120px]  bg-[#191A23] text-white min-h-[100vh] p-6">
+  <div class="flex  flex-col justify-start">
+    <p class="text-xl font-bold">
+      <%= @restaurant.name %>
+    </p>
+    <p class="text-sm">
+      <%= @restaurant.description %>
+    </p>
+    <p class="text-sm text-[#F36363] font-bold">
+      <%= @restaurant.locations %>
+    </p>
+  </div>
+
+  <div class="flex flex-col justify-center items-center">
+    <%= for food_type <- @food_types do %>
+      <div class="flex flex-col justify-center items-center w-[100%] h-[150px] bg-[#2A2B37] rounded-2xl mt-4 relative">
+        <img
+          src={food_type.type_image}
+          alt="foodtype"
+          class="w-[100%] h-[100%] object-cover rounded-2xl"
+        />
+
+        <div class="top-[50%] uppercase absolute left-[50%] transform translate-x-[-50%] translate-y-[-50%] text-white text-2xl ">
+          <%= food_type.type_of_food %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
