@@ -57,7 +57,7 @@
       class="w-[20px] h-[20px] object-cover"
     />
     <p class="text-[#F2F2F2] text-[10px]">
-      Food Item
+      Food Type
     </p>
   <% end %>
 
@@ -110,6 +110,7 @@
           food={@food}
           company={@company}
           restaurants={@restaurants}
+          food_types={@food_types}
           return_to={Routes.food_index_path(@socket, :index)}
         />
       </.modal>

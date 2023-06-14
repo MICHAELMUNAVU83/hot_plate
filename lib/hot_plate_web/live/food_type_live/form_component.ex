@@ -10,7 +10,9 @@ defmodule HotPlateWeb.FoodTypeLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, changeset)
+     |> assign(:uploaded_files, [])
+     |> allow_upload(:food_type_image, accept: ~w(.jpg .png .jpeg), max_entries: 1)}
   end
 
   @impl true
@@ -24,7 +26,27 @@ defmodule HotPlateWeb.FoodTypeLive.FormComponent do
   end
 
   def handle_event("save", %{"food_type" => food_type_params}, socket) do
-    save_food_type(socket, socket.assigns.action, food_type_params)
+    uploaded_files =
+      consume_uploaded_entries(socket, :food_type_image, fn %{path: path}, _entry ->
+        dest = Path.join([:code.priv_dir(:hot_plate), "static", "uploads", Path.basename(path)])
+
+        # The `static/uploads` directory must exist for `File.cp!/2`
+        # and MyAppWeb.static_paths/0 should contain uploads to work,.
+        File.cp!(path, dest)
+        {:ok, "/uploads/" <> Path.basename(dest)}
+      end)
+
+    {:noreply, update(socket, :uploaded_files, &(&1 ++ uploaded_files))}
+
+    new_food_type_params =
+      Map.put(food_type_params, "type_image", List.first(uploaded_files))
+      |> Map.put("company_id", socket.assigns.company.id)
+
+    save_food_type(socket, socket.assigns.action, new_food_type_params)
+  end
+
+  def handle_event("cancel-upload", %{"ref" => ref}, socket) do
+    {:noreply, cancel_upload(socket, :food_type_image, ref)}
   end
 
   defp save_food_type(socket, :edit, food_type_params) do

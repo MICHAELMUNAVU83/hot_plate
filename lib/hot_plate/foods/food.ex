@@ -11,6 +11,7 @@ defmodule HotPlate.Foods.Food do
     field(:image, :string)
     belongs_to(:company, HotPlate.Companies.Company)
     belongs_to(:restaurant, HotPlate.Restaurants.Restaurant)
+    belongs_to(:food_type, HotPlate.FoodTypes.FoodType)
 
     timestamps()
   end
@@ -26,7 +27,8 @@ defmodule HotPlate.Foods.Food do
       :status,
       :image,
       :company_id,
-      :restaurant_id
+      :restaurant_id,
+      :food_type_id
     ])
     |> validate_required([
       :name,
@@ -36,7 +38,8 @@ defmodule HotPlate.Foods.Food do
       :status,
       :image,
       :company_id,
-      :restaurant_id
+      :restaurant_id,
+      :food_type_id
     ])
   end
 end

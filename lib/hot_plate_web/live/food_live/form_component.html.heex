@@ -75,13 +75,28 @@
           <%= error_tag(f, :restaurant_id) %>
         </div>
       </div>
+      <div class="flex w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :food_image, class: "text-[#F36363]") %>
+          <%= live_file_input(@uploads.food_image,
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 bg-white focus:outline-[#F36363]"
+          ) %>
+        </div>
 
-      <div class="flex gap-2 flex-col w-[100%]">
-        <%= label(f, :food_image, class: "text-[#F36363]") %>
-        <%= live_file_input(@uploads.food_image,
-          class:
-            "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 bg-white focus:outline-[#F36363]"
-        ) %>
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :food_type_id, class: "text-[#F36363]") %>
+          <%= select(
+            f,
+            :food_type_id,
+            @food_types,
+            prompt: "Select a Food Type",
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
+
+          <%= error_tag(f, :food_type_id) %>
+        </div>
       </div>
 
       <%= for entry <- @uploads.food_image.entries do %>

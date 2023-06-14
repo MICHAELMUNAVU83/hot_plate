@@ -1,5 +1,5 @@
 <div>
-  <h2><%= @title %></h2>
+  <h2 class="text-[#F36363] font-bold text-xl">Add A  New Food Type</h2>
 
   <.form
     let={f}
@@ -9,16 +9,56 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <%= label(f, :type_of_food) %>
-    <%= text_input(f, :type_of_food) %>
-    <%= error_tag(f, :type_of_food) %>
+    <div class="mt-4 p-4 gap-4 flex flex-col ">
+      <div class="flex w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :type_of_food, class: "text-[#F36363]") %>
+          <%= select(f, :type_of_food, ["Breakfast", "Hot Meals", "Dessert", "Drinks"],
+            prompt: "Select type of food"
+          ) %>
+          <%= error_tag(f, :type_of_food) %>
+        </div>
 
-    <%= label(f, :type_image) %>
-    <%= text_input(f, :type_image) %>
-    <%= error_tag(f, :type_image) %>
+        <div class="flex gap-2 flex-col w-[48%]">
+          <%= label(f, :restaurant_id, class: "text-[#F36363]") %>
+          <%= select(
+            f,
+            :restaurant_id,
+            @restaurants,
+            prompt: "Select a Restaurant",
+            class:
+              "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#F36363]"
+          ) %>
 
-    <div>
-      <%= submit("Save", phx_disable_with: "Saving...") %>
+          <%= error_tag(f, :restaurant_id) %>
+        </div>
+      </div>
+      <div class="flex gap-2 flex-col w-[100%]">
+        <%= label(f, :typpe_image, class: "text-[#F36363]") %>
+        <%= live_file_input(@uploads.food_type_image,
+          class:
+            "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 bg-white focus:outline-[#F36363]"
+        ) %>
+      </div>
+
+      <%= for entry <- @uploads.food_type_image.entries do %>
+        <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
+        <button
+          type="button"
+          phx-click="cancel-upload"
+          phx-value-ref={entry.ref}
+          phx-target={@myself}
+        >
+          Cancel
+        </button>
+      <% end %>
+
+      <div class="flex gap-2 flex-col w-[30%] mx-auto">
+        <%= submit("Save",
+          phx_disable_with: "Saving...",
+          class: "bg-[#F36363] text-white p-2 rounded-md"
+        ) %>
+      </div>
     </div>
   </.form>
 </div>

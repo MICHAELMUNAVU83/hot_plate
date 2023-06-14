@@ -57,7 +57,7 @@
       class="w-[20px] h-[20px] object-cover"
     />
     <p class="text-[#F2F2F2] text-[10px]">
-      Food Item
+      Food  Type
     </p>
   <% end %>
 
@@ -108,6 +108,8 @@
           title={@page_title}
           action={@live_action}
           food_type={@food_type}
+          restaurants={@restaurants}
+          company={@company}
           return_to={Routes.food_type_index_path(@socket, :index)}
         />
       </.modal>
@@ -124,7 +126,6 @@
           class:
             "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out  w-[25%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
         ) %>
-
         <table>
           <thead>
             <tr>

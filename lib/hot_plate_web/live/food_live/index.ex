@@ -5,6 +5,7 @@ defmodule HotPlateWeb.FoodLive.Index do
   alias HotPlate.Foods.Food
   alias HotPlate.Companies
   alias HotPlate.Restaurants
+  alias HotPlate.FoodTypes
 
   @impl true
   def mount(_params, session, socket) do
@@ -18,6 +19,11 @@ defmodule HotPlateWeb.FoodLive.Index do
        :restaurants,
        Restaurants.list_restaurants()
        |> Enum.map(fn restaurant -> {restaurant.name, restaurant.id} end)
+     )
+     |> assign(
+       :food_types,
+       FoodTypes.list_food_types()
+       |> Enum.map(fn food_type -> {food_type.type_of_food, food_type.id} end)
      )}
   end
 
