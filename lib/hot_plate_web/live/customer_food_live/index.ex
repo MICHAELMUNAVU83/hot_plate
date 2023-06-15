@@ -1,5 +1,6 @@
 defmodule HotPlateWeb.CustomerFoodLive.Index do
   use HotPlateWeb, :live_view
+  alias HotPlate.FoodTypes
   alias HotPlate.Restaurants
   alias HotPlate.Foods
 
@@ -15,7 +16,9 @@ defmodule HotPlateWeb.CustomerFoodLive.Index do
   def handle_params(%{"id" => id, "food_type_id" => food_type_id}, _url, socket) do
     {:noreply,
      socket
-     |> assign(:foods, Foods.list_foods_by_restaurant_and_food_type(id, food_type_id))}
+     |> assign(:foods, Foods.list_foods_by_restaurant_and_food_type(id, food_type_id))
+     |> assign(:food_type, FoodTypes.get_food_type!(food_type_id))
+     |> assign(:restaurant, Restaurants.get_restaurant!(id))}
   end
 
   defp apply_action(socket, :index, _params) do

@@ -33,8 +33,8 @@ defmodule HotPlate.Foods do
     Repo.all(
       from(f in Food, where: f.restaurant_id == ^restaurant_id and f.food_type_id == ^food_type_id)
     )
-    |> Repo.preload(:food_type)
     |> Repo.preload(:restaurant)
+    |> Repo.preload(:food_type)
   end
 
   @doc """
