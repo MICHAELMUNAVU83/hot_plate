@@ -15,7 +15,9 @@
 
   <div class="flex flex-col justify-center items-center">
     <%= for food_type <- @food_types do %>
-      <div class="flex flex-col justify-center items-center w-[100%] h-[150px]   rounded-2xl mt-4 relative">
+      <%= link(
+            to: Routes.customer_food_index_path(@socket, :index, @restaurant, food_type),
+            class: "flex flex-col justify-center items-center w-[100%] h-[150px]   rounded-2xl mt-4 relative") do %>
         <img
           src={food_type.type_image}
           alt="foodtype"
@@ -24,22 +26,8 @@
 
         <div class="top-[50%] uppercase absolute h-[150px]  rounded-2xl flex justify-center items-center  bg-white/10 w-[100%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] text-[#F36363] font-semibold text-2xl ">
           <%= food_type.type_of_food %>
-            <%= link("View Menu",
-            to: Routes.customer_food_index_path(@socket, :index, @restaurant, food_type),
-            class: "text-sm text-[#F36363] font-semibold mt-2") %>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>

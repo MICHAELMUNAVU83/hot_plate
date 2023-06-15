@@ -26,9 +26,6 @@ defmodule HotPlate.FoodTypes do
     |> Repo.preload(:restaurant)
   end
 
-
-  
-
   @doc """
   Gets a single food_type.
 
