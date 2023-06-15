@@ -23,6 +23,7 @@ defmodule HotPlateWeb.Router do
     get("/", PageController, :index)
     live("/customer_page", CustomerPageLive.Index, :index)
     live("/customerrestaurants/:id", CustomerRestaurantLive.Show, :show)
+    live("/customerfoods/:id/:food_type_id", CustomerFoodLive.Index, :index)
   end
 
   scope "/", HotPlateWeb do
@@ -42,19 +43,19 @@ defmodule HotPlateWeb.Router do
     live("/staff_members/:id", StaffMemberLive.Show, :show)
     live("/staff_members/:id/show/edit", StaffMemberLive.Show, :edit)
 
-    live "/foods", FoodLive.Index, :index
-    live "/foods/new", FoodLive.Index, :new
-    live "/foods/:id/edit", FoodLive.Index, :edit
+    live("/foods", FoodLive.Index, :index)
+    live("/foods/new", FoodLive.Index, :new)
+    live("/foods/:id/edit", FoodLive.Index, :edit)
 
-    live "/foods/:id", FoodLive.Show, :show
-    live "/foods/:id/show/edit", FoodLive.Show, :edit
+    live("/foods/:id", FoodLive.Show, :show)
+    live("/foods/:id/show/edit", FoodLive.Show, :edit)
 
-    live "/food_types", FoodTypeLive.Index, :index
-    live "/food_types/new", FoodTypeLive.Index, :new
-    live "/food_types/:id/edit", FoodTypeLive.Index, :edit
+    live("/food_types", FoodTypeLive.Index, :index)
+    live("/food_types/new", FoodTypeLive.Index, :new)
+    live("/food_types/:id/edit", FoodTypeLive.Index, :edit)
 
-    live "/food_types/:id", FoodTypeLive.Show, :show
-    live "/food_types/:id/show/edit", FoodTypeLive.Show, :edit
+    live("/food_types/:id", FoodTypeLive.Show, :show)
+    live("/food_types/:id/show/edit", FoodTypeLive.Show, :edit)
   end
 
   # Other scopes may use custom stacks.

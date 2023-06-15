@@ -24,7 +24,15 @@ defmodule HotPlate.Foods do
   end
 
   def list_foods_by_company(company_id) do
-    Repo.all(from f in Food, where: f.company_id == ^company_id)
+    Repo.all(from(f in Food, where: f.company_id == ^company_id))
+    |> Repo.preload(:food_type)
+    |> Repo.preload(:restaurant)
+  end
+
+  def list_foods_by_restaurant_and_food_type(restaurant_id, food_type_id) do
+    Repo.all(
+      from(f in Food, where: f.restaurant_id == ^restaurant_id and f.food_type_id == ^food_type_id)
+    )
     |> Repo.preload(:food_type)
     |> Repo.preload(:restaurant)
   end
