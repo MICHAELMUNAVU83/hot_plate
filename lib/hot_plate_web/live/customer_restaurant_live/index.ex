@@ -1,4 +1,4 @@
-defmodule HotPlateWeb.CustomerRestaurantLive.Show do
+defmodule HotPlateWeb.CustomerRestaurantLive.Index do
   use HotPlateWeb, :live_view
 
   alias HotPlate.Restaurants

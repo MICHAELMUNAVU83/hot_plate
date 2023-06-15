@@ -32,7 +32,7 @@
             <%= length(restaurant.foods) %> Menu Items
           </p>
           <%= link("View Menu",
-            to: Routes.customer_restaurant_show_path(@socket, :show, restaurant),
+            to: Routes.customer_restaurant_index_path(@socket, :index, restaurant),
             class: "text-sm text-[#F36363] underline"
           ) %>
         </div>

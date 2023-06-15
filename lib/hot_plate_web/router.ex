@@ -22,7 +22,7 @@ defmodule HotPlateWeb.Router do
 
     get("/", PageController, :index)
     live("/customer_page", CustomerPageLive.Index, :index)
-    live("/customerrestaurants/:id", CustomerRestaurantLive.Show, :show)
+    live("/customerrestaurants/:id", CustomerRestaurantLive.Index, :index)
     live("/customerfoods/:id/:food_type_id", CustomerFoodLive.Index, :index)
   end
 

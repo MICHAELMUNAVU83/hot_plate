@@ -1,7 +1,7 @@
 <img src={@food_type.type_image} alt="customerpagebg" class="w-[100%]  h-[200px]   object-cover" />
 <div class="fixed z2  text-[#F36363] top-0">
   <%= link(
-        to: Routes.customer_restaurant_show_path(@socket, :show, @restaurant),
+        to: Routes.customer_restaurant_index_path(@socket, :index, @restaurant),
         class: "flex justify-center  bg-white rounded-3xl m-2  p-2 items-center "
 
       ) do %>
