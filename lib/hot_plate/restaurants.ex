@@ -23,7 +23,7 @@ defmodule HotPlate.Restaurants do
   end
 
   def list_restaurants_by_company(company_id) do
-    Repo.all(from r in Restaurant, where: r.company_id == ^company_id)
+    Repo.all(from(r in Restaurant, where: r.company_id == ^company_id))
   end
 
   @doc """
@@ -40,7 +40,7 @@ defmodule HotPlate.Restaurants do
       ** (Ecto.NoResultsError)
 
   """
-  def get_restaurant!(id), do: Repo.get!(Restaurant, id)
+  def get_restaurant!(id), do: Repo.get!(Restaurant, id) |> Repo.preload(:foods)
 
   @doc """
   Creates a restaurant.
