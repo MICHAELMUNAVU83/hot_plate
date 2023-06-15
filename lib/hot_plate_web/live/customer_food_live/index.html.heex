@@ -1,12 +1,16 @@
 <img src={@food_type.type_image} alt="customerpagebg" class="w-[100%]  h-[200px]   object-cover" />
 <div class="fixed z2  text-[#F36363] top-0">
-  <div class="flex justify-center  bg-white rounded-3xl m-2  p-2 items-center ">
+  <%= link(
+        to: Routes.customer_restaurant_show_path(@socket, :show, @restaurant),
+        class: "flex justify-center  bg-white rounded-3xl m-2  p-2 items-center "
+
+      ) do %>
     <img
       src={Routes.static_path(@socket, "/images/backicon.png")}
       alt="add to cart icon"
       class=" h-[25px] w-[25px]  object-cover"
     />
-  </div>
+  <% end %>
 </div>
 
 <div class="bg-[#191A23] h-[100vh] ">
