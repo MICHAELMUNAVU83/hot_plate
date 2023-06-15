@@ -1,4 +1,4 @@
-<div class="h-[100vh] fixed w-[130px] flex flex-col items-center pt-4 bg-[#1F2028]">
+<div class="h-[100vh] fixed w-[130px] hidden md:flex flex-col items-center pt-4 bg-[#1F2028]">
   <img
     src={Routes.static_path(@socket, "/images/logo.png")}
     alt="doctor"
@@ -98,9 +98,9 @@
   <% end %>
 </div>
 
-<div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
+<div class="md:ml-[130px] bg-[#191A23] min-h-[100vh] md:p-8  p-2">
   <div class="bg-[#1F2028] min-h-[100vh] p-4  text-white rounded-lg">
-    <div class="grid grid-cols-4 p-4 gap-4">
+    <div class="grid md:grid-cols-4 grid-cols-1 p-4 gap-4">
       <div class="bg-white rounded-2xl h-[200px]">
         <div class="p-2  flex flex-col items-end justify-start ">
           <p class="text-[#F36363]  text-2xl font-bold">

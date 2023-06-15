@@ -1,5 +1,5 @@
 <div class="login-bg bg-center bg-no-repeat  bg-cover h-[100vh] flex justify-center items-center ">
-  <div class="flex flex-col  p-8 w-[40%] min-h-[50%] bg-black/80 text-white">
+  <div class="flex flex-col  p-8  md:w-[40%] w-[90%] min-h-[50%] bg-black/80 text-white">
     <.form let={f} for={@changeset} action={Routes.company_registration_path(@conn, :create)}>
       <%= if @changeset.action do %>
         <div class="alert alert-danger">

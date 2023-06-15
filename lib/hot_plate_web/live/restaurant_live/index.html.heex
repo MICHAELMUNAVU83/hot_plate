@@ -1,4 +1,4 @@
-<div class="h-[100vh] fixed w-[130px] flex flex-col items-center pt-4 bg-[#1F2028]">
+<div class="h-[100vh] fixed w-[130px] hidden md:flex flex-col items-center pt-4 bg-[#1F2028]">
   <img
     src={Routes.static_path(@socket, "/images/logo.png")}
     alt="doctor"
@@ -98,7 +98,7 @@
   <% end %>
 </div>
 
-<div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
+<div class="md:ml-[130px] bg-[#191A23] min-h-[100vh] md:p-8 p-2 ">
   <div class="bg-[#1F2028] min-h-[100vh] p-4   rounded-lg">
     <%= if @live_action in [:new, :edit] do %>
       <.modal return_to={Routes.restaurant_index_path(@socket, :index)}>
@@ -118,12 +118,14 @@
       <div class="bg-[#F36363]  -mb-8  font-bold text-white text-xl rounded-md overlay  w-[90%]  mx-auto flex items-center p-4 py-8  h-[80px]">
         Restaurants
       </div>
-      <div class="bg-white p-24   w-[95%]     overflow-x-auto  mx-auto flex flex-col gap-4  shadow-md    shadow-[#F36363]/50">
+      <div class="bg-white py-24 px-8   w-[95%]     overflow-x-auto  mx-auto flex flex-col gap-4  shadow-md    shadow-[#F36363]/50">
         <%= live_patch("New Restaurant",
           to: Routes.restaurant_index_path(@socket, :new),
           class:
-            "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out  w-[25%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
+            "bg-[#F36363] hover:scale-105 transition-all duration-500 md:text-md text-sm  ease-in-out w-[70%]  md:w-[25%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
         ) %>
+
+        <%= if @restaurants != [] do %>
 
         <table class="text-center ">
           <thead>
@@ -150,9 +152,8 @@
                 <td class="py-2  flex items-center justify-center ">
                   <img
                     src={restaurant.logo}
-                    alt="art image"
-                    style="width: 100px; height: 100px;  object-fit: cover;"
-                    class="rounded-xl"
+                    alt="restaurant logo"
+                    class="rounded-xl md:w-[100px] md:h-[100px] w-[60px] h-[60px] object-cover"
                   />
                 </td>
                 <td class="py-2"><%= restaurant.name %></td>
@@ -163,7 +164,7 @@
                 <td class="py-2"><%= restaurant.latitude %></td>
 
                 <td class="py-2">
-                  <div class="flex justify-center gap-4">
+                  <div class="flex md:flex-row flex-col justify-center gap-2">
                     <div>
                       <%= live_redirect(
                       to: Routes.restaurant_show_path(@socket, :show, restaurant)
@@ -171,7 +172,7 @@
                         <img
                           src={Routes.static_path(@socket, "/images/viewicon.png")}
                           alt="restaurant"
-                          class="w-[20px] h-[20px] object-cover"
+                          class="w-[20px] h-[20px]  object-cover"
                         />
                       <% end %>
                     </div>
@@ -208,6 +209,16 @@
             <% end %>
           </tbody>
         </table>
+
+          <%else %>
+
+          <p class="text-[#F36363] text-center pt-20 ">
+
+          No Restaurants added
+
+          </p>
+
+          <%end %>
       </div>
     </div>
   </div>

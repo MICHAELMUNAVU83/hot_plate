@@ -1,5 +1,5 @@
 <div>
-  <h2 class="text-[#F36363] font-bold text-xl">Add A  New Restaurant</h2>
+  <h2 class="text-[#F36363] font-bold text-xl"><%= @title %></h2>
 
   <.form
     let={f}
@@ -10,8 +10,8 @@
     phx-submit="save"
   >
     <div class="mt-4 p-4 gap-4 flex flex-col ">
-      <div class="flex w-[100%] justify-between items-start">
-        <div class="flex gap-2 flex-col w-[48%]">
+      <div class="flex flex-col md:flex-row w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col w-[100%] md:w-[48%]">
           <%= label(f, :name, class: "text-[#F36363]") %>
           <%= text_input(f, :name,
             class:
@@ -22,7 +22,7 @@
           </p>
         </div>
 
-        <div class="flex  gap-2 flex-col w-[48%]">
+        <div class="flex  gap-2 flex-col w-[100%] md:w-[48%]">
           <%= label(f, :description, class: "text-[#F36363]") %>
           <%= text_input(f, :description,
             class:
@@ -34,8 +34,8 @@
         </div>
       </div>
 
-      <div class="flex w-[100%] justify-between items-start">
-        <div class="flex  gap-2 flex-col w-[48%]">
+      <div class="flex md:flex-row flex-col  w-[100%] justify-between items-start">
+        <div class="flex  gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :location, class: "text-[#F36363]") %>
           <%= text_input(f, :location,
             class:
@@ -46,7 +46,7 @@
           </p>
         </div>
 
-        <div class="flex gap-2 flex-col w-[48%]">
+        <div class="flex gap-2 flex-col  md:w-[48%] w-[100%]">
           <%= label(f, :longitude, class: "text-[#F36363]") %>
           <%= number_input(f, :longitude,
             class:
@@ -58,8 +58,8 @@
         </div>
       </div>
 
-      <div class="flex w-[100%] justify-between items-start">
-        <div class="flex gap-2 flex-col w-[48%]">
+      <div class="flex flex-col md:flex-row w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col  md:w-[48%] w-[100%]">
           <%= label(f, :latitude, class: "text-[#F36363]") %>
           <%= number_input(f, :latitude,
             class:
@@ -70,7 +70,7 @@
           </p>
         </div>
 
-        <div class="flex gap-2 flex-col w-[48%]">
+        <div class="flex gap-2 flex-col  md:w-[48%] w-[100%]">
           <%= label(f, :status, class: "text-[#F36363]") %>
           <%= select(f, :status, ["open", "closed"],
             prompt: "Select Status",
@@ -83,8 +83,8 @@
         </div>
       </div>
 
-      <div class="flex w-[100%] justify-between items-start">
-        <div class="flex gap-2 flex-col w-[48%]">
+      <div class="flex md:flex-row flex-col w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col  md:w-[48%] w-[100%]">
           <%= label(f, :contact_person_name, class: "text-[#F36363]") %>
           <%= text_input(f, :contact_person_name,
             class:
@@ -95,7 +95,7 @@
           </p>
         </div>
 
-        <div class="flex  gap-2 flex-col w-[48%]">
+        <div class="flex  gap-2 flex-col  md:w-[48%] w-[100%]">
           <%= label(f, :contact_person_phone_number, class: "text-[#F36363]") %>
           <%= text_input(f, :contact_person_phone_number,
             class:
