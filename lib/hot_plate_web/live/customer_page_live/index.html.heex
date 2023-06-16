@@ -19,7 +19,7 @@
 
     <div class="grid grid-cols-2 mt-8 gap-4">
       <%= for restaurant <- @restaurants do %>
-        <%= link(
+        <%= live_redirect(
             to: Routes.customer_restaurant_index_path(@socket, :index, restaurant),
             class: "bg-[#1F2028] flex flex-col gap-2 items-start   rounded-2xl md:h-[400px] h-[200px] p-2"
           ) do %>
