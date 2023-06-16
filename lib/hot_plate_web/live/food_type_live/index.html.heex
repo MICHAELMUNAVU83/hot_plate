@@ -1,4 +1,4 @@
-<div class="h-[100vh] fixed w-[130px] flex flex-col items-center pt-4 bg-[#1F2028]">
+<div class="h-[100vh] fixed w-[130px] hidden md:flex flex-col items-center pt-4 bg-[#1F2028]">
   <img
     src={Routes.static_path(@socket, "/images/logo.png")}
     alt="doctor"
@@ -98,7 +98,7 @@
   <% end %>
 </div>
 
-<div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
+<div class="md:ml-[130px] bg-[#191A23] min-h-[100vh] md:p-8 p-2 ">
   <div class="bg-[#1F2028] min-h-[100vh] p-4   rounded-lg">
     <%= if @live_action in [:new, :edit] do %>
       <.modal return_to={Routes.food_type_index_path(@socket, :index)}>
@@ -118,17 +118,17 @@
         Types of food
       </div>
 
-      <div class="bg-white p-24   w-[95%]     overflow-x-auto  mx-auto flex flex-col gap-4  shadow-md    shadow-[#F36363]/50">
+      <div class="bg-white py-24 px-8    w-[95%]     overflow-x-auto  mx-auto flex flex-col gap-4  shadow-md    shadow-[#F36363]/50">
         <%= live_patch("New Food Type",
           to: Routes.food_type_index_path(@socket, :new),
           class:
-            "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out  w-[25%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
+            "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out w-[70%]  md:w-[25%] flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
         ) %>
 
         <%= if @food_types != [] do %>
           <table class="text-center ">
             <thead>
-              <tr class="text-[#1F2028] text-center">
+              <tr class="text-[#1F2028] text-sm md:text-md text-center">
                 <th>Type Image</th>
 
                 <th>Type Of Food</th>
@@ -153,7 +153,7 @@
                   <td class="py-2"><%= food_type.type_of_food %></td>
 
                   <td class="py-2">
-                    <div class="flex justify-center gap-4">
+                    <div class="flex md:flex-row flex-col justify-center items-center gap-2">
                       <%= live_redirect(
                       to: Routes.food_type_show_path(@socket, :show, food_type)
                     ) do %>

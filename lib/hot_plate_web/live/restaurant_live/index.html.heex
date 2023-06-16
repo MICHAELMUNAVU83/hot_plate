@@ -128,7 +128,7 @@
         <%= if @restaurants != [] do %>
           <table class="text-center ">
             <thead>
-              <tr class="text-[#1F2028] text-center">
+              <tr class="text-[#1F2028] text-sm md:text-md text-center">
                 <th>Image</th>
                 <th>Name</th>
                 <th>Description</th>
@@ -146,7 +146,7 @@
               <%= for restaurant <- @restaurants do %>
                 <tr
                   id={"restaurant-#{restaurant.id}"}
-                  class="text-[#191A23] border-b-2 border-[#F36363] "
+                  class="text-[#191A23] text-sm md:text-md border-b-2 border-[#F36363] "
                 >
                   <td class="py-2  flex items-center justify-center ">
                     <img
@@ -163,7 +163,7 @@
                   <td class="py-2"><%= restaurant.latitude %></td>
 
                   <td class="py-2">
-                    <div class="flex md:flex-row flex-col justify-center gap-2">
+                    <div class="flex md:flex-row flex-col items-center justify-center gap-2">
                       <div>
                         <%= live_redirect(
                       to: Routes.restaurant_show_path(@socket, :show, restaurant)
