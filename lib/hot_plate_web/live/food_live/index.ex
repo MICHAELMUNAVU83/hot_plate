@@ -17,7 +17,7 @@ defmodule HotPlateWeb.FoodLive.Index do
      |> assign(:foods, Foods.list_foods_by_company(company.id))
      |> assign(
        :restaurants,
-       Restaurants.list_restaurants()
+       Restaurants.list_restaurants_by_company(company.id)
        |> Enum.map(fn restaurant -> {restaurant.name, restaurant.id} end)
      )
      |> assign(
