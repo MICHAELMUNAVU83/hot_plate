@@ -10,8 +10,8 @@
     phx-submit="save"
   >
     <div class="mt-4 p-4 gap-4 flex flex-col ">
-      <div class="flex w-[100%] justify-between items-start">
-        <div class="flex gap-2 flex-col w-[48%]">
+      <div class="flex md:flex-row flex-col w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :type_of_food, class: "text-[#F36363]") %>
           <%= select(f, :type_of_food, ["Breakfast", "Hot Meals", "Dessert", "Drinks"],
             prompt: "Select type of food"
@@ -21,7 +21,7 @@
           </p>
         </div>
 
-        <div class="flex gap-2 flex-col w-[48%]">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :type_image, class: "text-[#F36363]") %>
           <%= live_file_input(@uploads.food_type_image,
             class:
@@ -45,7 +45,7 @@
         </div>
       <% end %>
 
-      <div class="flex gap-2 flex-col w-[30%] mx-auto">
+      <div class="flex gap-2 flex-col md:w-[30%] w-[40%] mx-auto">
         <%= submit("Save",
           phx_disable_with: "Saving...",
           class: "bg-[#F36363] text-white p-2 rounded-md"

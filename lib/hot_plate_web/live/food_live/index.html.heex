@@ -1,4 +1,4 @@
-<div class="h-[100vh] fixed w-[130px] flex flex-col items-center pt-4 bg-[#1F2028]">
+<div class="h-[100vh] fixed w-[130px] hidden md:flex flex-col items-center pt-4 bg-[#1F2028]">
   <img
     src={Routes.static_path(@socket, "/images/logo.png")}
     alt="doctor"
@@ -98,7 +98,7 @@
   <% end %>
 </div>
 
-<div class="ml-[130px] bg-[#191A23] min-h-[100vh] p-8 ">
+<div class="md:ml-[130px] bg-[#191A23] min-h-[100vh] md:p-8 p-2 ">
   <div class="bg-[#1F2028] min-h-[100vh] p-4   rounded-lg">
     <%= if @live_action in [:new, :edit] do %>
       <.modal return_to={Routes.food_index_path(@socket, :index)}>
@@ -120,21 +120,21 @@
       <div class="bg-[#F36363]  -mb-8  font-bold text-white text-xl rounded-md overlay  w-[90%]  mx-auto flex items-center p-4 py-8  h-[80px]">
         Food Items in your Menu
       </div>
-      <div class="bg-white p-24   w-[95%]     overflow-x-auto  mx-auto flex flex-col gap-4  shadow-md    shadow-[#F36363]/50">
+      <div class="bg-white py-24 px-8   w-[95%]     overflow-x-auto  mx-auto flex flex-col gap-4  shadow-md    shadow-[#F36363]/50">
         <%= live_patch("New Food Item",
           to: Routes.food_index_path(@socket, :new),
           class:
-            "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out  w-[25%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
+            "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out  md:w-[25%] w-[70%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
         ) %>
 
         <%= if @foods != [] do %>
           <table class="text-center ">
             <thead>
-              <tr class="text-[#1F2028] text-center">
+              <tr class="text-[#1F2028] text-xs md:text-md  text-center">
                 <th>Image</th>
                 <th>Name</th>
                 <th>Price</th>
-                <th>Ready time</th>
+                <th>Duration</th>
                 <th>Pax</th>
                 <th>Status</th>
                 <th>Food Type</th>
@@ -145,13 +145,15 @@
             </thead>
             <tbody id="foods">
               <%= for food <- @foods do %>
-                <tr id={"food-#{food.id}"} class="text-[#191A23] border-b-2 border-[#F36363] ">
+                <tr
+                  id={"food-#{food.id}"}
+                  class="text-[#191A23] text-sm md:text-md  border-b-2 border-[#F36363] "
+                >
                   <td class="py-2  flex items-center justify-center ">
                     <img
                       src={food.image}
-                      alt="art image"
-                      style="width: 100px; height: 100px; object-fit: cover;"
-                      class="rounded-xl"
+                      alt="food image"
+                      class="rounded-xl md:w-[100px] md:h-[100px] w-[40px] h-[60px] object-cover"
                     />
                   </td>
                   <td class="py-2"><%= food.name %></td>
@@ -163,7 +165,7 @@
                   <td class="py-2"><%= food.restaurant.name %></td>
 
                   <td class="py-2">
-                    <div class="flex justify-center gap-4">
+                    <div class="flex md:flex-row flex-col items-center justify-center gap-2">
                       <%= live_redirect( to: Routes.food_show_path(@socket, :show, food)) do %>
                         <img
                           src={Routes.static_path(@socket, "/images/viewicon.png")}

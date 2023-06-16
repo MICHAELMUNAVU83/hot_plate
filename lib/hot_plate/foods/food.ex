@@ -41,6 +41,6 @@ defmodule HotPlate.Foods.Food do
       :restaurant_id,
       :food_type_id
     ])
-    |> validate_inclusion(:pax , 1..10 , message: "Pax must be between 1 and 10")
+    |> validate_inclusion(:pax, 1..10, message: "Pax must be between 1 and 10")
   end
 end
