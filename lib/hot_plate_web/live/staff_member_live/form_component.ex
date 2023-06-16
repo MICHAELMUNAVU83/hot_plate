@@ -26,7 +26,7 @@ defmodule HotPlateWeb.StaffMemberLive.FormComponent do
   end
 
   def handle_event("cancel-upload", %{"ref" => ref}, socket) do
-    {:noreply, cancel_upload(socket, :restaurant_logo, ref)}
+    {:noreply, cancel_upload(socket, :staff_photo, ref)}
   end
 
   def handle_event("save", %{"staff_member" => staff_member_params}, socket) do

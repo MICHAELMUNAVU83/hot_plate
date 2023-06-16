@@ -16,11 +16,13 @@
           <%= select(f, :type_of_food, ["Breakfast", "Hot Meals", "Dessert", "Drinks"],
             prompt: "Select type of food"
           ) %>
-          <%= error_tag(f, :type_of_food) %>
+          <p class="pt-5">
+            <%= error_tag(f, :type_of_food) %>
+          </p>
         </div>
 
         <div class="flex gap-2 flex-col w-[48%]">
-          <%= label(f, :typpe_image, class: "text-[#F36363]") %>
+          <%= label(f, :type_image, class: "text-[#F36363]") %>
           <%= live_file_input(@uploads.food_type_image,
             class:
               "p-2 text-black border-transparent focus:border-transparent focus:ring-0 p-2 bg-white focus:outline-[#F36363]"
@@ -29,15 +31,18 @@
       </div>
 
       <%= for entry <- @uploads.food_type_image.entries do %>
-        <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
-        <button
-          type="button"
-          phx-click="cancel-upload"
-          phx-value-ref={entry.ref}
-          phx-target={@myself}
-        >
-          Cancel
-        </button>
+        <div class="flex  flex-row  gap-2 items-start ">
+          <%= live_img_preview(entry, class: "w-[200px] h-[200px]") %>
+          <button
+            type="button"
+            phx-click="cancel-upload"
+            phx-value-ref={entry.ref}
+            phx-target={@myself}
+            class="bg-[#F36363] text-white w-[30px] h-[30px]  flex justify-center items-center rounded-md"
+          >
+            x
+          </button>
+        </div>
       <% end %>
 
       <div class="flex gap-2 flex-col w-[30%] mx-auto">
