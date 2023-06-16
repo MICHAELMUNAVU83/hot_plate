@@ -10,8 +10,8 @@
     phx-submit="save"
   >
     <div class="mt-4 p-4 gap-4 flex flex-col ">
-      <div class="flex w-[100%] justify-between items-start">
-        <div class="flex gap-2 flex-col w-[48%]">
+      <div class="flex flex-col md:flex-row w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :name, class: "text-[#F36363]") %>
           <%= text_input(f, :name,
             class:
@@ -23,7 +23,7 @@
           </p>
         </div>
 
-        <div class="flex gap-2 flex-col w-[48%]">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :price, class: "text-[#F36363]") %>
           <%= number_input(f, :price,
             class:
@@ -36,8 +36,8 @@
         </div>
       </div>
 
-      <div class="flex w-[100%] justify-between items-start">
-        <div class="flex gap-2 flex-col w-[48%]">
+      <div class="flex flex-col md:flex-row w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :ready_time, class: "text-[#F36363]") %>
           <%= select(
             f,
@@ -52,7 +52,7 @@
           </p>
         </div>
 
-        <div class="flex gap-2 flex-col w-[48%]">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :pax, class: "text-[#F36363]") %>
           <%= number_input(f, :pax,
             class:
@@ -67,8 +67,8 @@
         </div>
       </div>
 
-      <div class="flex w-[100%] justify-between items-start">
-        <div class="flex gap-2 flex-col w-[48%]">
+      <div class="flex flex-col md:flex-row w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :status, class: "text-[#F36363]") %>
           <%= select(f, :status, ["active", "inactive"],
             prompt: "Select Status",
@@ -80,7 +80,7 @@
           </p>
         </div>
 
-        <div class="flex gap-2 flex-col w-[48%]">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :restaurant_id, class: "text-[#F36363]") %>
           <%= select(
             f,
@@ -96,8 +96,8 @@
           </p>
         </div>
       </div>
-      <div class="flex w-[100%] justify-between items-start">
-        <div class="flex gap-2 flex-col w-[48%]">
+      <div class="flex flex-col md:flex-row w-[100%] justify-between items-start">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :food_image, class: "text-[#F36363]") %>
           <%= live_file_input(@uploads.food_image,
             class:
@@ -105,7 +105,7 @@
           ) %>
         </div>
 
-        <div class="flex gap-2 flex-col w-[48%]">
+        <div class="flex gap-2 flex-col md:w-[48%] w-[100%]">
           <%= label(f, :food_type_id, class: "text-[#F36363]") %>
           <%= select(
             f,
@@ -136,7 +136,7 @@
         </div>
       <% end %>
 
-      <div class="flex gap-2 flex-col w-[30%] mx-auto">
+      <div class="flex gap-2 flex-col md:w-[30%] w-[40%] mx-auto">
         <%= submit("Save",
           phx_disable_with: "Saving...",
           class: "bg-[#F36363] text-white p-2 rounded-md"
