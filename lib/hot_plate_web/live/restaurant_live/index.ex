@@ -42,6 +42,9 @@ defmodule HotPlateWeb.RestaurantLive.Index do
   def handle_event("delete", %{"id" => id}, socket) do
     restaurant = Restaurants.get_restaurant!(id)
     {:ok, _} = Restaurants.delete_restaurant(restaurant)
+
+    IO.inspect("Restaurant deleted")
+
     company = socket.assigns.company
 
     {:noreply, assign(socket, :restaurants, Restaurants.list_restaurants_by_company(company.id))}
