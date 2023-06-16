@@ -126,99 +126,93 @@
         ) %>
 
         <%= if @restaurants != [] do %>
+          <table class="text-center ">
+            <thead>
+              <tr class="text-[#1F2028] text-center">
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Location</th>
 
-        <table class="text-center ">
-          <thead>
-            <tr class="text-[#1F2028] text-center">
-              <th>Image</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Status</th>
-              <th>Location</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
 
-              <th>Longitude</th>
-              <th>Latitude</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
 
-              <th>Actions</th>
-            </tr>
-          </thead>
+            <tbody id="restaurants">
+              <%= for restaurant <- @restaurants do %>
+                <tr
+                  id={"restaurant-#{restaurant.id}"}
+                  class="text-[#191A23] border-b-2 border-[#F36363] "
+                >
+                  <td class="py-2  flex items-center justify-center ">
+                    <img
+                      src={restaurant.logo}
+                      alt="restaurant logo"
+                      class="rounded-xl md:w-[100px] md:h-[100px] w-[60px] h-[60px] object-cover"
+                    />
+                  </td>
+                  <td class="py-2"><%= restaurant.name %></td>
+                  <td class="py-2"><%= restaurant.description %></td>
+                  <td class="py-2"><%= restaurant.status %></td>
+                  <td class="py-2"><%= restaurant.location %></td>
+                  <td class="py-2"><%= restaurant.longitude %></td>
+                  <td class="py-2"><%= restaurant.latitude %></td>
 
-          <tbody id="restaurants">
-            <%= for restaurant <- @restaurants do %>
-              <tr
-                id={"restaurant-#{restaurant.id}"}
-                class="text-[#191A23] border-b-2 border-[#F36363] "
-              >
-                <td class="py-2  flex items-center justify-center ">
-                  <img
-                    src={restaurant.logo}
-                    alt="restaurant logo"
-                    class="rounded-xl md:w-[100px] md:h-[100px] w-[60px] h-[60px] object-cover"
-                  />
-                </td>
-                <td class="py-2"><%= restaurant.name %></td>
-                <td class="py-2"><%= restaurant.description %></td>
-                <td class="py-2"><%= restaurant.status %></td>
-                <td class="py-2"><%= restaurant.location %></td>
-                <td class="py-2"><%= restaurant.longitude %></td>
-                <td class="py-2"><%= restaurant.latitude %></td>
-
-                <td class="py-2">
-                  <div class="flex md:flex-row flex-col justify-center gap-2">
-                    <div>
-                      <%= live_redirect(
+                  <td class="py-2">
+                    <div class="flex md:flex-row flex-col justify-center gap-2">
+                      <div>
+                        <%= live_redirect(
                       to: Routes.restaurant_show_path(@socket, :show, restaurant)
                     ) do %>
-                        <img
-                          src={Routes.static_path(@socket, "/images/viewicon.png")}
-                          alt="restaurant"
-                          class="w-[20px] h-[20px]  object-cover"
-                        />
-                      <% end %>
-                    </div>
+                          <img
+                            src={Routes.static_path(@socket, "/images/viewicon.png")}
+                            alt="restaurant"
+                            class="w-[20px] h-[20px]  object-cover"
+                          />
+                        <% end %>
+                      </div>
 
-                    <div>
-                      <%= live_patch(
+                      <div>
+                        <%= live_patch(
                       to: Routes.restaurant_index_path(@socket, :edit, restaurant)
                     )  do %>
-                        <img
-                          src={Routes.static_path(@socket, "/images/editicon.png")}
-                          alt="restaurant"
-                          class="w-[20px] h-[20px] object-cover"
-                        />
-                      <% end %>
-                    </div>
+                          <img
+                            src={Routes.static_path(@socket, "/images/editicon.png")}
+                            alt="restaurant"
+                            class="w-[20px] h-[20px] object-cover"
+                          />
+                        <% end %>
+                      </div>
 
-                    <div>
-                      <%= link(
+                      <div>
+                        <%= link(
                       to: "#",
                       phx_click: "delete",
                       phx_value_id: restaurant.id,
                       data: [confirm: "Are you sure?"]
                     ) do %>
-                        <img
-                          src={Routes.static_path(@socket, "/images/deleteicon.png")}
-                          alt="restaurant"
-                          class="w-[20px] h-[20px] object-cover"
-                        />
-                      <% end %>
+                          <img
+                            src={Routes.static_path(@socket, "/images/deleteicon.png")}
+                            alt="restaurant"
+                            class="w-[20px] h-[20px] object-cover"
+                          />
+                        <% end %>
+                      </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-
-          <%else %>
-
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
           <p class="text-[#F36363] text-center pt-20 ">
-
-          No Restaurants added
-
+            No Restaurants added
           </p>
-
-          <%end %>
+        <% end %>
       </div>
     </div>
   </div>

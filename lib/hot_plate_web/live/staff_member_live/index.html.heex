@@ -126,82 +126,88 @@
             "bg-[#F36363] hover:scale-105 transition-all duration-500 ease-in-out  w-[25%]  flex items-center justify-center py-2 px-4  rounded-md text-white mb-8"
         ) %>
 
-        <table class="text-center ">
-          <thead>
-            <tr class="text-[#1F2028] text-center">
-              <th>Profile picture</th>
-              <th>First name</th>
-              <th>Last name</th>
+        <%= if @staff_members != [] do %>
+          <table class="text-center ">
+            <thead>
+              <tr class="text-[#1F2028] text-center">
+                <th>Profile picture</th>
+                <th>First name</th>
+                <th>Last name</th>
 
-              <th>Contact</th>
+                <th>Contact</th>
 
-              <th>Status</th>
-              <th>Restaurant Name</th>
+                <th>Status</th>
+                <th>Restaurant Name</th>
 
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="staff_members">
-            <%= for staff_member <- @staff_members do %>
-              <tr
-                id={"staff_member-#{staff_member.id}"}
-                class="text-[#191A23] border-b-2 border-[#F36363] "
-              >
-                <td class="py-2  flex items-center justify-center ">
-                  <img
-                    src={staff_member.profile_picture}
-                    alt="art image"
-                    style="width: 100px; height: 100px; object-fit: cover;"
-                    class="rounded-xl"
-                  />
-                </td>
-                <td class="py-2"><%= staff_member.first_name %></td>
-                <td class="py-2"><%= staff_member.last_name %></td>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="staff_members">
+              <%= for staff_member <- @staff_members do %>
+                <tr
+                  id={"staff_member-#{staff_member.id}"}
+                  class="text-[#191A23] border-b-2 border-[#F36363] "
+                >
+                  <td class="py-2  flex items-center justify-center ">
+                    <img
+                      src={staff_member.profile_picture}
+                      alt="art image"
+                      style="width: 100px; height: 100px; object-fit: cover;"
+                      class="rounded-xl"
+                    />
+                  </td>
+                  <td class="py-2"><%= staff_member.first_name %></td>
+                  <td class="py-2"><%= staff_member.last_name %></td>
 
-                <td class="py-2"><%= staff_member.contact %></td>
-                <td class="py-2"><%= staff_member.status %></td>
-                <td class="py-2"><%= staff_member.restaurant.name %></td>
+                  <td class="py-2"><%= staff_member.contact %></td>
+                  <td class="py-2"><%= staff_member.status %></td>
+                  <td class="py-2"><%= staff_member.restaurant.name %></td>
 
-                <td class="py-2">
-                  <div class="flex justify-center gap-4">
-                    <%= live_redirect(
+                  <td class="py-2">
+                    <div class="flex justify-center gap-4">
+                      <%= live_redirect(
                     to: Routes.staff_member_show_path(@socket, :show, staff_member)
                   ) do %>
-                      <img
-                        src={Routes.static_path(@socket, "/images/viewicon.png")}
-                        alt="restaurant"
-                        class="w-[20px] h-[20px] object-cover"
-                      />
-                    <% end %>
+                        <img
+                          src={Routes.static_path(@socket, "/images/viewicon.png")}
+                          alt="restaurant"
+                          class="w-[20px] h-[20px] object-cover"
+                        />
+                      <% end %>
 
-                    <%= live_patch(
+                      <%= live_patch(
                     to: Routes.staff_member_index_path(@socket, :edit, staff_member)
                   ) do %>
-                      <img
-                        src={Routes.static_path(@socket, "/images/editicon.png")}
-                        alt="restaurant"
-                        class="w-[20px] h-[20px] object-cover"
-                      />
-                    <% end %>
+                        <img
+                          src={Routes.static_path(@socket, "/images/editicon.png")}
+                          alt="restaurant"
+                          class="w-[20px] h-[20px] object-cover"
+                        />
+                      <% end %>
 
-                    <%= link(
+                      <%= link(
                     to: "#",
                     phx_click: "delete",
                     phx_value_id: staff_member.id,
                     data: [confirm: "Are you sure?"]
                   ) do %>
-                      <img
-                        src={Routes.static_path(@socket, "/images/deleteicon.png")}
-                        alt="restaurant"
-                        class="w-[20px] h-[20px] object-cover"
-                      />
-                    <% end %>
-                  </div>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+                        <img
+                          src={Routes.static_path(@socket, "/images/deleteicon.png")}
+                          alt="restaurant"
+                          class="w-[20px] h-[20px] object-cover"
+                        />
+                      <% end %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p class="text-[#F36363] text-center pt-20 ">
+            No Staff Members Added
+          </p>
+        <% end %>
       </div>
     </div>
   </div>
