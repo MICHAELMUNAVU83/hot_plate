@@ -160,3 +160,8 @@
   z-index: 8;
 }
 
+.h300 {
+  height: 250px !important;
+
+  padding: 8;
+}

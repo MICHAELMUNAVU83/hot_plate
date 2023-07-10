@@ -48,31 +48,142 @@ Hooks.Chart = {
     var total_tickets_for_each_event = [12, 19, 17, 20, 18];
     var total_tickets_scanned_for_each_event = [9, 13, 10, 15, 9];
 
-    var barColors = ["red", "green", "blue", "orange", "brown"];
+    var barColors = ["white", "white", "white", "white", "white"];
 
     new Chart("myChart", {
       type: "bar",
+      color: "white",
       data: {
         labels: events_in_the_system,
         datasets: [
           {
+            label: "Total Tickets",
             backgroundColor: barColors,
             data: total_tickets_for_each_event,
           },
           {
+            label: "Total Tickets Scanned",
             backgroundColor: barColors,
             data: total_tickets_scanned_for_each_event,
           },
         ],
       },
       options: {
-        legend: { display: false },
         responsive: true,
-        backgroundColor: "white",
-        height: 800,
-        title: {
-          display: true,
-          text: "Tickets Scanned for each Event",
+
+        scales: {
+          y: {
+            ticks: { color: "white", beginAtZero: true },
+          },
+          x: {
+            ticks: { color: "white", beginAtZero: true },
+          },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: "Tickets Scanned for each Event",
+            color: "white",
+          },
+          legend: {
+            labels: {
+              color: "white",
+            },
+          },
+        },
+      },
+    });
+  },
+};
+
+Hooks.Chart2 = {
+  mounted() {
+    var xValues = ["Golf Event 1", "Golf Event 2", "Golf Event 3", "Golf Event 4", "Golf Event 5"];
+    var yValues = [55, 49, 44, 24, 15];
+    var barColors = ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"];
+
+    new Chart("myChart2", {
+      type: "pie",
+
+      data: {
+        labels: xValues,
+        datasets: [
+          {
+            backgroundColor: barColors,
+            data: yValues,
+          },
+        ],
+      },
+
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: "Tickets Scanned for each Event",
+            color: "white",
+          },
+
+          legend: {
+            labels: {
+              color: "white",
+            },
+          },
+        },
+      },
+    });
+  },
+};
+
+Hooks.Chart3 = {
+  mounted() {
+    var events_in_the_system = [
+      "Golf Event 1",
+      "Golf Event 2",
+      "Golf Event 3",
+      "Golf Event 4",
+      "Golf Event 5",
+    ];
+    var total_tickets_for_each_event = [12, 19, 17, 20, 18];
+
+    var barColors = ["white", "white", "white", "white", "white"];
+
+    new Chart("myChart3", {
+      type: "line",
+      color: "white",
+      data: {
+        labels: events_in_the_system,
+        datasets: [
+          {
+            label: "Total Tickets",
+            backgroundColor: barColors,
+            borderColor: "white",
+            data: total_tickets_for_each_event,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+
+        scales: {
+          y: {
+            ticks: { color: "white", beginAtZero: true },
+          },
+          x: {
+            ticks: { color: "white", beginAtZero: true },
+          },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: "Tickets Scanned for each Event",
+            color: "white",
+          },
+          legend: {
+            labels: {
+              color: "white",
+            },
+          },
         },
       },
     });
