@@ -38,22 +38,30 @@ let Hooks = {};
 
 Hooks.Chart = {
   mounted() {
-    var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    var yValues = [55, 49, 44, 24, 15];
+    var events_in_the_system = [
+      "Golf Event 1",
+      "Golf Event 2",
+      "Golf Event 3",
+      "Golf Event 4",
+      "Golf Event 5",
+    ];
+    var total_tickets_for_each_event = [12, 19, 17, 20, 18];
+    var total_tickets_scanned_for_each_event = [9, 13, 10, 15, 9];
+
     var barColors = ["red", "green", "blue", "orange", "brown"];
 
     new Chart("myChart", {
       type: "bar",
       data: {
-        labels: xValues,
+        labels: events_in_the_system,
         datasets: [
           {
             backgroundColor: barColors,
-            data: yValues,
+            data: total_tickets_for_each_event,
           },
           {
             backgroundColor: barColors,
-            data: yValues,
+            data: total_tickets_scanned_for_each_event,
           },
         ],
       },
@@ -64,7 +72,7 @@ Hooks.Chart = {
         height: 800,
         title: {
           display: true,
-          text: "World Wine Production 2018",
+          text: "Tickets Scanned for each Event",
         },
       },
     });
