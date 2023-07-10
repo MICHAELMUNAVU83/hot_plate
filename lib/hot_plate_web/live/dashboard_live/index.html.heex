@@ -99,8 +99,8 @@
 </div>
 
 <div class="md:ml-[130px] bg-[#191A23] min-h-[100vh] md:p-8  p-2">
-  <div class="bg-[#1F2028] min-h-[100vh] p-4  text-white rounded-lg">
-    <div class="grid md:grid-cols-4 grid-cols-1 p-4 gap-4">
+  <div class="bg-[#1F2028] min-h-[100vh] flex flex-col justify-between p-4  text-white rounded-lg">
+    <div class="grid md:grid-cols-4 grid-cols-1 p-4 gap-4 ">
       <div class="bg-white rounded-2xl h-[200px]">
         <div class="p-2  flex flex-col items-end justify-start ">
           <p class="text-[#F36363]  text-2xl font-bold">
@@ -140,6 +140,21 @@
             <%= length(@foods) %>
           </p>
         </div>
+      </div>
+    </div>
+
+    <div
+      class="h-[70vh] flex bg-center bg-cover bg-no-repeat"
+      style="background-image: url('https://res.cloudinary.com/dakiak4mc/image/upload/v1688970096/Downloader.la_-64aba315c729e_msvqdu.jpg')"
+    >
+      <div class="w-[45%] h-[70vh]">
+        <canvas
+          id="myChart"
+          class="w-[100%] h-[600px] object-contain"
+          phx-hook="Chart"
+          phx-update="ignore"
+        >
+        </canvas>
       </div>
     </div>
   </div>
